@@ -1,0 +1,21 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+li button.remove.pull-right {
+	padding: 0;
+	color: red;
+	margin-top: -23px;
+}
+
+li.list-group-item:hover {
+	background: $brand-primary;
+	color: #fff;
+	cursor: pointer;
+}
