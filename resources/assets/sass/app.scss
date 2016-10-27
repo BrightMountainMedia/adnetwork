@@ -36,6 +36,13 @@ $white: #fff;
 	color: $white;
 }
 
+.panel-default {
+	.panel-heading {
+		background-color: $brand-primary;
+		color: $white;
+	}
+}
+
 li button.remove.pull-right {
 	padding: 0;
 	color: red;
