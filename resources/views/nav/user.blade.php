@@ -83,6 +83,13 @@
                             </a>
                         </li>
 
+                        <!-- Security -->
+                        <li>
+                            <a href="/security">
+                                <i class="fa fa-fw fa-btn fa-lock"></i> Security
+                            </a>
+                        </li>
+
                         <li class="divider"></li>
 
                         <!-- Support -->

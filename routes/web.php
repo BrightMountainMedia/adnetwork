@@ -34,3 +34,6 @@ Route::post('/admin/add-stats/add_stats', 'StatsController@store');
 
 Route::get('/profile', ['as' => 'profile', 'uses' => 'ProfileController@create']);
 Route::post('/profile', ['as' => 'profile_store', 'uses' => 'ProfileController@store']);
+
+Route::get('/security', ['as' => 'security', 'uses' => 'SecurityController@create']);
+Route::post('/security', ['as' => 'security_update', 'uses' => 'SecurityController@update']);
