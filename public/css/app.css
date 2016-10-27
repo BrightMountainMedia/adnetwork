@@ -5766,6 +5766,28 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.navbar-brand {
+  padding: 0;
+  height: initial; }
+
+.navbar-nav > li > a {
+  padding-top: 25px;
+  padding-bottom: 25px; }
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.table-hover > tbody > tr:hover,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background-color: #1a80b6;
+  color: #fff; }
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background-color: #1a80b6;
+  color: #fff; }
+
 li button.remove.pull-right {
   padding: 0;
   color: red;

@@ -1,3 +1,3 @@
 <a class="navbar-brand" href="{{ url('/') }}">
-    {{ config('app.name', 'Laravel') }}
+    <img src="{{ url('/img/bmtm-logo.png') }}" style="height: 75px;">
 </a>
