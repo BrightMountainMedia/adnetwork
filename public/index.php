@@ -7,6 +7,13 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+/**
+ * Add the PHP SDK Woopra Tracker
+ *
+ * @package  Woopra
+ */
+require './woopra_tracker.php';
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

@@ -1,7 +1,8 @@
 <!-- NavBar For Authenticated Users -->
-{{ require('/woopra_tracker.php') }}
-{{ $woopra = new WoopraTracker(array("domain" => 'partners.brightmountainmedia.com')) }}
-{{ $woopra->identify(array('email' => Auth::user()->email, 'first_name' => Auth::user()->first_name, 'last_name' => Auth::user()->last_name)) }}
+<?php
+    $woopra = new WoopraTracker(array("domain" => 'partners.brightmountainmedia.com'));
+    $woopra->identify(array('email' => Auth::user()->email, 'first_name' => Auth::user()->first_name, 'last_name' => Auth::user()->last_name));
+?>
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="container">
         <div class="navbar-header">
