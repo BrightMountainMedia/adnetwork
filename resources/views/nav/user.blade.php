@@ -1,11 +1,4 @@
 <!-- NavBar For Authenticated Users -->
-<?php
-    $woopra = new WoopraTracker(array("domain" => 'partners.brightmountainmedia.com'));
-    $email = Auth::user()->email;
-    $first_name = Auth::user()->first_name;
-    $last_name = Auth::user()->last_name;
-    $woopra->identify(array('email' => $email, 'name' => $first_name.' '.$last_name));
-?>
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="container">
         <div class="navbar-header">
