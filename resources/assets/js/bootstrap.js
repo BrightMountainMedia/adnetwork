@@ -16,7 +16,12 @@ require('bootstrap-sass');
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = require('vue');
+if (window.Vue === undefined) {
+    window.Vue = require('vue');
+
+    window.Bus = new Vue();
+}
+
 require('vue-resource');
 
 /**

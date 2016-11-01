@@ -1,4 +1,11 @@
 Vue.component('stats', {
+    props: ['user'],
+
+    /**
+     * Load mixins for the component.
+     */
+    mixins: [require('./../../bmtm/mixins/tab-state')],
+
     /**
      * The component's data.
      */
@@ -27,13 +34,34 @@ Vue.component('stats', {
      * The component has been created by Vue.
      */
     created() {
-        //
+        var self = this;
+
+        Bus.$on('showPublisher', function (publisherId) {
+            self.navigateToPublisher(publisherId);
+        });
+
+        Bus.$on('hashChanged', function (hash, parameters) {
+            alert(hash);
+            alert(parameters);
+
+            if (hash != 'publisher') {
+                return true;
+            }
+
+            if (parameters && parameters.length > 0) {
+                self.loadPublisherProfile({ id: parameters[0] });
+            }  else {
+                self.showPublishers();
+            }
+
+            return true;
+        });
     },
 
     /**
-     * Bootstrap the component.
+     * Prepare the component.
      */
-    ready() {
+    mounted() {
         // this.statsForm.user_id = this.publisher.id;
         // this.statsForm.date = this.stat.date;
         // this.statsForm.site = this.stat.site;
@@ -43,15 +71,6 @@ Vue.component('stats', {
         // this.statsForm.income = this.stat.income;
         // this.statsForm.ecpm = this.stat.ecpm;
         // this.statsForm.tag = this.stat.tag;
-    },
-
-    events: {
-        /**
-         * Show the publisher profile.
-         */
-        showPublisher(publisherId) {
-            this.navigateToPublisher(publisherId);
-        }
     },
 
     methods: {

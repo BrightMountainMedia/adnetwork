@@ -22,32 +22,15 @@ module.exports = {
      * The component has been created by Vue.
      */
     created() {
-        //
-    },
+        var self = this;
 
+        Bus.$on('updateUser', function () {
+            self.getUser();
+        });
 
-    /**
-     * Prepare the application.
-     */
-    ready() {
-        this.whenReady();
-    },
-
-
-    events: {
-        /*
-         * Update the current user of the application.
-         */
-        updateUser() {
-            this.getUser();
-        },
-
-        /**
-         * Show the customer support e-mail form.
-         */
-        showSupportForm() {
-            if (this.user) {
-                this.supportForm.from = this.user.email;
+        Bus.$on('showSupportForm', function () {
+            if (self.user) {
+                self.supportForm.from = self.user.email;
             }
 
             $('#modal-support').modal('show');
@@ -55,15 +38,22 @@ module.exports = {
             setTimeout(() => {
                 $('#support-subject').focus();
             }, 500);
-        }
+        });
     },
 
+    /**
+     * Prepare the application.
+     */
+    mounted() {
+        this.whenReady();
+    },
 
     methods: {
         /**
          * Finish bootstrapping the application.
          */
         whenReady() {
+            this.getUser();
             console.log('We have now finished bootstrapping the application');
         },
 

@@ -17,8 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/user/current', 'UserController@current');
-// Route::post('/support/email', 'SupportController@sendEmail');
+Route::get('/user/current', 'UserController@current');
+Route::post('/support/email', 'SupportController@sendEmail');
 
 // Front-End Pages
 Route::get('/dashboard', 'DashboardController@index');

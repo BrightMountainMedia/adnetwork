@@ -34,7 +34,7 @@ module.exports = {
 
                 history.pushState(null, null, '#/' + $(this).attr('href').substring(1));
 
-                // self.broadcastTabChange($(this).attr('href').substring(1));
+                self.broadcastTabChange($(this).attr('href').substring(1));
             });
         },
 
@@ -57,7 +57,7 @@ module.exports = {
                 tab.tab('show');
             }
 
-            // this.broadcastTabChange(hash, parameters);
+            this.broadcastTabChange(hash, parameters);
         },
 
 
@@ -69,7 +69,7 @@ module.exports = {
 
             tab.tab('show');
 
-            // this.broadcastTabChange(tab.attr('href').substring(1));
+            this.broadcastTabChange(tab.attr('href').substring(1));
         },
 
 
@@ -85,8 +85,7 @@ module.exports = {
          * Broadcast that a tab change happened.
          */
         broadcastTabChange(hash, parameters) {
-            this.$dispatch('sparkHashChanged', hash, parameters);
-            this.$broadcast('sparkHashChanged', hash, parameters);
+            Bus.$emit('hashChanged', hash, parameters);
         }
     }
 };

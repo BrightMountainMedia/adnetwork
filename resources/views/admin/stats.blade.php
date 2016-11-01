@@ -263,7 +263,10 @@
 								                    <label class="col-sm-4 control-label">Fill</label>
 
 								                    <div class="col-sm-8">
-								                        <input type="text" class="form-control" name="fill" v-model="statsForm.fill">
+								                        <div class="input-group">
+								                        	<input type="text" class="form-control" name="fill" v-model="statsForm.fill">
+								                        	<div class="input-group-addon">%</div>
+								                        </div>
 
 								                        <span class="help-block" v-show="statsForm.errors.has('fill')">
 								                            @{{ statsForm.errors.get('fill') }}
@@ -278,7 +281,10 @@
 								                    <label class="col-sm-4 control-label">Income</label>
 
 								                    <div class="col-sm-8">
-								                        <input type="text" class="form-control" name="income" v-model="statsForm.income">
+								                    	<div class="input-group">
+								                        	<div class="input-group-addon">$</div>
+								                        	<input type="text" class="form-control" name="income" v-model="statsForm.income">
+								                        </div>
 
 								                        <span class="help-block" v-show="statsForm.errors.has('income')">
 								                            @{{ statsForm.errors.get('income') }}
@@ -293,7 +299,10 @@
 								                    <label class="col-sm-4 control-label">eCPM</label>
 
 								                    <div class="col-sm-8">
-								                        <input type="text" class="form-control" name="tag" v-model="statsForm.ecpm">
+								                    	<div class="input-group">
+								                        	<div class="input-group-addon">$</div>
+								                        	<input type="text" class="form-control" name="tag" v-model="statsForm.ecpm">
+								                        </div>
 
 								                        <span class="help-block" v-show="statsForm.errors.has('ecpm')">
 								                            @{{ statsForm.errors.get('ecpm') }}
