@@ -26,10 +26,10 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $stats = Stats::where('user_id', $user->id)->get();
+        $stats = Stats::where('user_id', $user->id)->orderBy('date', 'desc')->orderBy('id', 'desc')->get();
         $count = 10;
         if ( count($stats) > $count ) {
-            $stats = Stats::where('user_id', $user->id)->paginate($count);
+            $stats = Stats::where('user_id', $user->id)->orderBy('date', 'desc')->orderBy('id', 'desc')->paginate($count);
         }
 
         return view('dashboard', compact('stats'));
