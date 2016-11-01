@@ -24,6 +24,18 @@
                         </thead>
                         <tbody>
                             @foreach ($stats as $stat)
+                            @if ( strpos($stat->tag, 'Total') !== false )
+                            <tr>
+                                <td style="font-weight: bold;">{{ $stat->date }}</td>
+                                <td style="font-weight: bold;">{{ $stat->site }}</td>
+                                <td style="font-weight: bold;">{{ $stat->tag }}</td>
+                                <td style="font-weight: bold;">{{ $stat->impressions }}</td>
+                                <td style="font-weight: bold;">{{ $stat->served }}</td>
+                                <td style="font-weight: bold;">{{ $stat->fill }}%</td>
+                                <td style="font-weight: bold;">${{ $stat->income }}</td>
+                                <td style="font-weight: bold;">${{ $stat->ecpm }}</td>
+                            </tr>
+                            @else
                             <tr>
                                 <td>{{ $stat->date }}</td>
                                 <td>{{ $stat->site }}</td>
@@ -34,6 +46,7 @@
                                 <td>${{ $stat->income }}</td>
                                 <td>${{ $stat->ecpm }}</td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
