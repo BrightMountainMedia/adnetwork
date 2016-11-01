@@ -167,14 +167,22 @@
 			                                    	</thead>
 			                                    	<tbody>
 			                                    		<tr v-for="stat in stats">
-			                                    			<td>@{{ stat.date }}</td>
-			                                    			<td>@{{ stat.site }}</td>
-			                                    			<td>@{{ stat.tag }}</td>
-			                                    			<td>@{{ stat.impressions }}</td>
-			                                    			<td>@{{ stat.served }}</td>
-			                                    			<td>@{{ stat.fill }}%</td>
-			                                    			<td>$@{{ stat.income }}</td>
-			                                    			<td>$@{{ stat.ecpm }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.date }}</td>
+			                                    			<td v-else>@{{ stat.date }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.site }}</td>
+			                                    			<td v-else>@{{ stat.site }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.tag }}</td>
+			                                    			<td v-else>@{{ stat.tag }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.impressions }}</td>
+			                                    			<td v-else>@{{ stat.impressions }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.served }}</td>
+			                                    			<td v-else>@{{ stat.served }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.fill }}%</td>
+			                                    			<td v-else>@{{ stat.fill }}%</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">$@{{ stat.income }}</td>
+			                                    			<td v-else>$@{{ stat.income }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">$@{{ stat.ecpm }}</td>
+			                                    			<td v-else>$@{{ stat.ecpm }}</td>
 			                                    		</tr>
 			                                    	</tbody>
 			                                    </table>

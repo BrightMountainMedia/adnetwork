@@ -142,6 +142,13 @@ Vue.component('stats', {
             this.showingPublisherProfile = false;
             this.publisher = null;
             this.stats = null;
+        },
+
+        getTotal(stat) {
+            if ( stat.tag.includes('total') ) {
+                console.log(stat);
+                return ':style="bold"';
+            }
         }
     }
 });
