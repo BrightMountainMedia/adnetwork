@@ -29,7 +29,7 @@ class StatsController extends Controller
     public function profile($publisherId)
     {
         $publisher = User::where('id', $publisherId)->first();
-        $stats = Stats::where('user_id', $publisherId)->get();
+        $stats = Stats::where('user_id', $publisherId)->orderBy('date', 'desc')->get();
 
         return response()->json(['publisher' => $publisher, 'stats' => $stats]);
     }
