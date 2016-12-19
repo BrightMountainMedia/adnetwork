@@ -8,39 +8,6 @@
 		        <div class="col-md-12">
 			        <div class="panel panel-default" v-show=" ! showingPublisherProfile">
 			            <div class="panel-heading">
-			            	Publishers 
-			            	(
-			            		@if ( method_exists($publishers, 'total') )
-			            			{{ $publishers->total() }}
-			            		@else
-			            			{{ count($publishers) }}
-			            		@endif
-			            	)
-			            </div>
-
-			            <div class="panel-body">
-			                @if (Session::has('success'))
-		                        <div class="alert alert-success">
-		                          {{Session::get('success')}}
-		                        </div>
-		                    @endif
-
-			                <ul class="list-group">
-			                    @foreach ($publishers as $publisher)
-			                    <li class="list-group-item" @click.prevent="showPublisherProfile({{ $publisher->id }})">
-			                        {{ $publisher->first_name }} {{ $publisher->last_name }}
-			                    </li>
-			                    @endforeach
-			                </ul>
-
-			                @if ( method_exists($publishers, 'links') )
-			                	{{ $publishers->links() }}
-			                @endif
-			            </div>
-			        </div>
-
-			        <div class="panel panel-default" v-show=" ! showingPublisherProfile">
-			            <div class="panel-heading">
 			            	Add Publisher
 			            </div>
 
@@ -129,6 +96,39 @@
 			            </div>
 			        </div>
 
+			        <div class="panel panel-default" v-show=" ! showingPublisherProfile">
+			            <div class="panel-heading">
+			            	Publishers 
+			            	(
+			            		@if ( method_exists($publishers, 'total') )
+			            			{{ $publishers->total() }}
+			            		@else
+			            			{{ count($publishers) }}
+			            		@endif
+			            	)
+			            </div>
+
+			            <div class="panel-body">
+			                @if (Session::has('success'))
+		                        <div class="alert alert-success">
+		                          {{Session::get('success')}}
+		                        </div>
+		                    @endif
+
+			                <ul class="list-group">
+			                    @foreach ($publishers as $publisher)
+			                    <li class="list-group-item" @click.prevent="showPublisherProfile({{ $publisher->id }})">
+			                        {{ $publisher->first_name }} {{ $publisher->last_name }}
+			                    </li>
+			                    @endforeach
+			                </ul>
+
+			                @if ( method_exists($publishers, 'links') )
+			                	{{ $publishers->links() }}
+			                @endif
+			            </div>
+			        </div>
+
 					<!-- Publisher Profile Detail -->
 				    <div v-show="showingPublisherProfile" style="display: none;">
 				        <div class="row" v-if="loading">
@@ -144,55 +144,6 @@
 				        <div v-if=" ! loading && publisher">
 				            <div class="row">
 				                <div class="col-sm-12">
-				                    <div class="panel panel-default" v-if="stats">
-				                        <div class="panel-heading">
-				                            <i class="fa fa-btn fa-close" style="cursor: pointer; color: red;" @click="showPublishers()"></i> 
-				                            @{{ publisher.first_name }} @{{ publisher.last_name }} Stats
-				                        </div>
-
-				                        <div class="panel-body">
-		                                    <div v-if="stats.length">
-			                                    <table class="table table-bordered table-hover table-responsive">
-			                                    	<thead>
-			                                    		<tr>
-			                                    			<th>Date</th>
-			                                    			<th>Site</th>
-			                                    			<th>Tag</th>
-			                                    			<th>Impressions</th>
-			                                    			<th>Served</th>
-			                                    			<th>Fill</th>
-			                                    			<th>Income</th>
-			                                    			<th>eCPM</th>
-			                                    		</tr>
-			                                    	</thead>
-			                                    	<tbody>
-			                                    		<tr v-for="stat in stats">
-			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.date }}</td>
-			                                    			<td v-else>@{{ stat.date }}</td>
-			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.site }}</td>
-			                                    			<td v-else>@{{ stat.site }}</td>
-			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.tag }}</td>
-			                                    			<td v-else>@{{ stat.tag }}</td>
-			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.impressions }}</td>
-			                                    			<td v-else>@{{ stat.impressions }}</td>
-			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.served }}</td>
-			                                    			<td v-else>@{{ stat.served }}</td>
-			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.fill }}%</td>
-			                                    			<td v-else>@{{ stat.fill }}%</td>
-			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">$@{{ stat.income }}</td>
-			                                    			<td v-else>$@{{ stat.income }}</td>
-			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">$@{{ stat.ecpm }}</td>
-			                                    			<td v-else>$@{{ stat.ecpm }}</td>
-			                                    		</tr>
-			                                    	</tbody>
-			                                    </table>
-			                                </div>
-			                                <div v-else>
-			                                	<p>This publisher doesn't currently have any stats to display.</p>
-			                                </div>
-				                        </div>
-				                    </div>
-
 				                    <div class="panel panel-default">
 				                    	<div class="panel-heading">Add Stats</div>
 
@@ -349,6 +300,55 @@
 
 								            </form>
 				                    	</div>
+				                    </div>
+
+				                    <div class="panel panel-default" v-if="stats">
+				                        <div class="panel-heading">
+				                            <i class="fa fa-btn fa-close" style="cursor: pointer; color: red;" @click="showPublishers()"></i> 
+				                            @{{ publisher.first_name }} @{{ publisher.last_name }} Stats
+				                        </div>
+
+				                        <div class="panel-body">
+		                                    <div v-if="stats.length">
+			                                    <table class="table table-bordered table-hover table-responsive">
+			                                    	<thead>
+			                                    		<tr>
+			                                    			<th>Date</th>
+			                                    			<th>Site</th>
+			                                    			<th>Tag</th>
+			                                    			<th>Impressions</th>
+			                                    			<th>Served</th>
+			                                    			<th>Fill</th>
+			                                    			<th>Income</th>
+			                                    			<th>eCPM</th>
+			                                    		</tr>
+			                                    	</thead>
+			                                    	<tbody>
+			                                    		<tr v-for="stat in stats">
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.date }}</td>
+			                                    			<td v-else>@{{ stat.date }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.site }}</td>
+			                                    			<td v-else>@{{ stat.site }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.tag }}</td>
+			                                    			<td v-else>@{{ stat.tag }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.impressions }}</td>
+			                                    			<td v-else>@{{ stat.impressions }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.served }}</td>
+			                                    			<td v-else>@{{ stat.served }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.fill }}%</td>
+			                                    			<td v-else>@{{ stat.fill }}%</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">$@{{ stat.income }}</td>
+			                                    			<td v-else>$@{{ stat.income }}</td>
+			                                    			<td style="font-weight: bold" v-if="stat.tag.includes('Total')">$@{{ stat.ecpm }}</td>
+			                                    			<td v-else>$@{{ stat.ecpm }}</td>
+			                                    		</tr>
+			                                    	</tbody>
+			                                    </table>
+			                                </div>
+			                                <div v-else>
+			                                	<p>This publisher doesn't currently have any stats to display.</p>
+			                                </div>
+				                        </div>
 				                    </div>
 				                </div>
 				            </div>
