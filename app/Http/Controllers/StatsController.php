@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Stats;
 use App\Http\Requests;
@@ -82,7 +83,7 @@ class StatsController extends Controller
         $user = User::where('id', $request->user_id)->first();
         $publisher = $user['first_name']. ' ' .$user['last_name'];
 
-        return response('/admin/add-stats');
+        return response('/admin/add-stats#/publisher/'.$request->user_id);
         // return redirect('/admin/add-stats')->with('success', 'Stats Added for ' . $publisher . '!');
     }
 
