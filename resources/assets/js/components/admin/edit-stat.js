@@ -1,6 +1,7 @@
 function adminEditStatForm (stat) {
     if ( stat ) {
         return {
+            stat_id: stat.id,
             user_id: stat.user_id,
             date: stat.date,
             site: stat.site,
@@ -54,8 +55,8 @@ Vue.component('edit-stat', {
         /**
          * Save the stat
          */
-        saveStat(publisher) {
-            this.$http.post('/admin/publisher/edit_stat', this.statsForm)
+        saveStat() {
+            this.$http.put('/admin/stat/' + this.statsForm.stat_id + '/edit_stat', this.statsForm)
                 .then(response => {
                     this.editingStat = false;
                     $('#modal-edit-stat').modal('hide');

@@ -10,6 +10,7 @@ use App\Stats;
 use App\Http\Requests;
 use App\Http\Requests\AddRoleRequest;
 use App\Http\Requests\AddStatsRequest;
+use App\Http\Requests\UpdateStatsRequest;
 
 class AdminController extends Controller
 {
@@ -80,5 +81,30 @@ class AdminController extends Controller
         $stats = Stats::where('user_id', $id)->orderBy('date', 'DESC')->orderBy('id', 'DESC')->get();
 
         return response()->json(['publisher' => $publisher, 'stats' => $stats]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Department\UpdateDepartmentRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStat(UpdateStatsRequest $request, $id)
+    {
+        Stats::where('id', $id)
+            ->update([
+                'user_id' => $request->user_id, 
+                'date' => $request->date, 
+                'site' => $request->site, 
+                'impressions' => $request->impressions, 
+                'served' => $request->served, 
+                'income' => $request->income, 
+                'tag' => $request->tag, 
+            ]);
+
+        $publisher = User::find($request->user_id);
+
+        return response()->json(['publisher' => $publisher]);
     }
 }

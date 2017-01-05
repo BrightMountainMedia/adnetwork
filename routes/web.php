@@ -27,6 +27,7 @@ Route::get('/admin', 'AdminController@index');
 Route::get('/admin/publishers', 'AdminController@allPublishers');
 Route::get('/admin/publisher/{id}/publisher_profile', 'AdminController@show');
 Route::post('/admin/publisher/add_stat', 'AdminController@storeStat');
+Route::put('/admin/stat/{id}/edit_stat', 'AdminController@updateStat');
 
 Route::get('/admin/add-user-role', ['as' => 'role', 'uses' => 'RoleController@create']);
 Route::post('/admin/add-user-role', ['as' => 'role.store', 'uses' => 'RoleController@store']);

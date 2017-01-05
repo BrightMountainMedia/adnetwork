@@ -1,4 +1,4 @@
-<edit-stat :stat="stat" inline-template>
+<edit-stat inline-template>
     <div>
         <div class="modal fade" id="modal-edit-stat" tabindex="-1" role="dialog">
             <div class="modal-dialog" v-if="editingStat">
@@ -116,7 +116,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 
-                        <button type="button" class="btn btn-primary" @click="saveStat" :disabled="statsForm.busy">
+                        <button type="button" class="btn btn-primary" @click="saveStat()" :disabled="statsForm.busy">
                             <span v-if="statsForm.busy">
                                 <i class="fa fa-btn fa-spinner fa-spin"></i>Adding
                             </span>
