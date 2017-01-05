@@ -40,7 +40,7 @@ class AdminController extends Controller
      */
     public function allPublishers()
     {
-        $publishers = User::where('role', 'publisher')->orderBy('id')->get();
+        $publishers = User::where('role', 'publisher')->orderBy('first_name')->get();
 
         return response()->json(['publishers' => $publishers]);
     }
@@ -77,7 +77,7 @@ class AdminController extends Controller
     public function show($id)
     {
         $publisher = User::find($id);
-        $stats = Stats::where('user_id', $id)->orderBy('date', 'DESC')->orderBy('id')->get();
+        $stats = Stats::where('user_id', $id)->orderBy('date', 'DESC')->orderBy('id', 'DESC')->get();
 
         return response()->json(['publisher' => $publisher, 'stats' => $stats]);
     }
