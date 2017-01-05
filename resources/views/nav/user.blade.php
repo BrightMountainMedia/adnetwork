@@ -37,24 +37,10 @@
                             <!-- Admin -->
                             <li class="dropdown-header">Admin</li>
 
-                            <!-- Add User Role -->
-                            <!-- <li>
-                                <a href="/admin/add-user-role">
-                                    <i class="fa fa-fw fa-btn fa-plus"></i> Add User Role
-                                </a>
-                            </li> -->
-
-                            <!-- Add User -->
-                            <!-- <li>
-                                <a href="/admin/add-user">
-                                    <i class="fa fa-fw fa-btn fa-user-plus"></i> Add User
-                                </a>
-                            </li> -->
-
-                            <!-- Publishers -->
+                            <!-- Admin -->
                             <li>
-                                <a href="/admin/add-stats">
-                                    <i class="fa fa-fw fa-btn fa-area-chart"></i> Add Stats
+                                <a href="/admin">
+                                    <i class="fa fa-fw fa-btn fa-cog"></i> Admin
                                 </a>
                             </li>
 

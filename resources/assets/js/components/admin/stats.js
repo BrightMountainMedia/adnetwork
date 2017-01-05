@@ -4,7 +4,7 @@ Vue.component('stats', {
     /**
      * Load mixins for the component.
      */
-    mixins: [require('./../../bmtm/mixins/tab-state')],
+    mixins: [require('./../mixins/tab-state')],
 
     /**
      * The component's data.
@@ -41,9 +41,6 @@ Vue.component('stats', {
         });
 
         Bus.$on('hashChanged', function (hash, parameters) {
-            alert(hash);
-            alert(parameters);
-
             if (hash != 'publisher') {
                 return true;
             }
@@ -62,6 +59,7 @@ Vue.component('stats', {
      * Prepare the component.
      */
     mounted() {
+        this.usePushStateForTabs('.list-group');
         // this.statsForm.user_id = this.publisher.id;
         // this.statsForm.date = this.stat.date;
         // this.statsForm.site = this.stat.site;

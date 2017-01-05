@@ -9,4 +9,9 @@
  */
 
 // Admin
+require('./admin/admin-settings');
+require('./admin/publishers');
+require('./admin/publisher-profile');
+require('./admin/add-publisher');
+require('./admin/add-stat');
 require('./admin/stats');

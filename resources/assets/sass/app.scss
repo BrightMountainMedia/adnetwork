@@ -10,6 +10,53 @@
 
 $white: #fff;
 
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.panel-flush {
+	.panel-header,
+	.panel-body {
+		padding: 0;
+	}
+}
+
+.m-b-none {
+    margin-bottom: 0;
+}
+
+.admin-settings-stacked-tabs {
+	border-radius: 4px;
+	font-weight: 300;
+
+	a {
+		border-bottom: 1px solid #e4ecf2;
+		border-left: 3px solid transparent;
+	}
+
+	li {
+		a:active,
+		a:hover,
+		a:link,
+		a:visited {
+			background-color: transparent;
+		}
+	}
+}
+
+.nav {
+	margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+
+	li.active {
+		a {
+			border-left: 3px solid $brand-primary;
+		}
+	}
+}
+
 .navbar-brand {
 	padding: 0;
 	height: initial;
@@ -28,6 +75,7 @@ $white: #fff;
 .navbar-default .navbar-nav > .open > a:focus {
 	background-color: $brand-primary;
 	color: $white;
+	cursor: pointer;
 }
 
 .dropdown-menu > li > a:hover, 

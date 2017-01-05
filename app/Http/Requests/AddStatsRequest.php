@@ -28,9 +28,7 @@ class AddStatsRequest extends FormRequest
             'site' => 'string|present',
             'impressions' => 'string|present',
             'served' => 'string|present',
-            'fill' => 'string|present',
             'income' => 'string|present',
-            'ecpm' => 'string|present',
             'tag' => 'string|present',
         ];
     }

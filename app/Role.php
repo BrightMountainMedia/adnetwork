@@ -23,4 +23,12 @@ class Role extends Model
     protected $hidden = [
         'updated_at', 'created_at',
     ];
+
+    /**
+     * The users that belong to the role.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'role_user', 'user_id', 'role_id');
+    }
 }

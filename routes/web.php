@@ -23,6 +23,11 @@ Route::post('/support/email', 'SupportController@sendEmail');
 // Front-End Pages
 Route::get('/dashboard', 'DashboardController@index');
 
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/publishers', 'AdminController@allPublishers');
+Route::get('/admin/publisher/{id}/publisher_profile', 'AdminController@show');
+Route::post('/admin/publisher/add_stat', 'AdminController@storeStat');
+
 Route::get('/admin/add-user-role', ['as' => 'role', 'uses' => 'RoleController@create']);
 Route::post('/admin/add-user-role', ['as' => 'role.store', 'uses' => 'RoleController@store']);
 Route::post('/admin/add-user-role/{id}', 'RoleController@destroy');
