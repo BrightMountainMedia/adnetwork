@@ -42,7 +42,7 @@ Vue.component('add-stat', {
         /**
          * Save the stat
          */
-        saveStat(publisher) {
+        saveStat() {
             this.$http.post('/admin/publisher/add_stat', this.statsForm)
                 .then(response => {
                     this.addingStat = false;

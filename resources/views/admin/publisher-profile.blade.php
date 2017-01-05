@@ -55,22 +55,22 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="stat in stats">
-                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.date }}</td>
-                                            <td v-else>@{{ stat.date }}</td>
-                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.site }}</td>
-                                            <td v-else>@{{ stat.site }}</td>
-                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.tag }}</td>
-                                            <td v-else>@{{ stat.tag }}</td>
-                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.impressions }}</td>
-                                            <td v-else>@{{ stat.impressions }}</td>
-                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ stat.served }}</td>
-                                            <td v-else>@{{ stat.served }}</td>
-                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')">@{{ fill_rate(stat).toFixed(2) }}%</td>
-                                            <td v-else>@{{ fill_rate(stat).toFixed(2) }}%</td>
-                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')">$@{{ stat.income }}</td>
-                                            <td v-else>$@{{ stat.income }}</td>
-                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')">$@{{ eCPM_calc(stat).toFixed(2) }}</td>
-                                            <td v-else>$@{{ eCPM_calc(stat).toFixed(2) }}</td>
+                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')" @click="editStat(stat)">@{{ stat.date }}</td>
+                                            <td v-else @click="editStat(stat)">@{{ stat.date }}</td>
+                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')" @click="editStat(stat)">@{{ stat.site }}</td>
+                                            <td v-else @click="editStat(stat)">@{{ stat.site }}</td>
+                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')" @click="editStat(stat)">@{{ stat.tag }}</td>
+                                            <td v-else @click="editStat(stat)">@{{ stat.tag }}</td>
+                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')" @click="editStat(stat)">@{{ stat.impressions }}</td>
+                                            <td v-else @click="editStat(stat)">@{{ stat.impressions }}</td>
+                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')" @click="editStat(stat)">@{{ stat.served }}</td>
+                                            <td v-else @click="editStat(stat)">@{{ stat.served }}</td>
+                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')" @click="editStat(stat)">@{{ fill_rate(stat).toFixed(2) }}%</td>
+                                            <td v-else @click="editStat(stat)">@{{ fill_rate(stat).toFixed(2) }}%</td>
+                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')" @click="editStat(stat)">$@{{ stat.income }}</td>
+                                            <td v-else @click="editStat(stat)">$@{{ stat.income }}</td>
+                                            <td style="font-weight: bold" v-if="stat.tag.includes('Total')" @click="editStat(stat)">$@{{ eCPM_calc(stat).toFixed(2) }}</td>
+                                            <td v-else @click="editStat(stat)">$@{{ eCPM_calc(stat).toFixed(2) }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -89,6 +89,10 @@
 
         <div>
             @include('admin.modals.add-stat')
+        </div>
+
+        <div>
+            @include('admin.modals.edit-stat')
         </div>
     </div>
 </department-profile>

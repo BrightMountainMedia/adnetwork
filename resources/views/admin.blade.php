@@ -34,7 +34,7 @@
                                 </li> -->
 
                                 <!-- Publishers Link -->
-                                <li role="presentation">
+                                <li role="presentation" v-show="publishers[0]">
                                     <a href="#publisher" aria-controls="publisher" role="tab" data-toggle="tab">
                                         <i class="fa fa-fw fa-btn fa-user-plus"></i> Publishers
                                     </a>
@@ -54,7 +54,7 @@
                     </div> -->
 
                     <!-- Publishers -->
-                    <div role="tabpanel" class="tab-pane active" id="publisher">
+                    <div role="tabpanel" class="tab-pane active" id="publisher" v-show="publishers[0]">
                         @include('admin.publishers')
                     </div>
                 </div>

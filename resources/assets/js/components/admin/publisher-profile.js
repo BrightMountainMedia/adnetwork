@@ -38,6 +38,13 @@ Vue.component('publisher-profile', {
         },
 
         /**
+         * Show the edit stat modal.
+         */
+        editStat(stat) {
+            Bus.$emit('editStat', stat);
+        },
+
+        /**
          * Get the publisher profile.
          */
         getPublisherProfile(id) {
@@ -65,15 +72,6 @@ Vue.component('publisher-profile', {
          */
         showSearch() {
             Bus.$emit('showSearch');
-
-            this.publisher = null;
-        },
-
-        /**
-         * Show the stat profile and hide the publisher profile.
-         */
-        showStat(stat) {
-            Bus.$emit('showStat', stat);
 
             this.publisher = null;
         },
