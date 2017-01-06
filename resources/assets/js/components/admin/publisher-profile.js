@@ -8,6 +8,7 @@ Vue.component('publisher-profile', {
             publisher: null,
             stats: null,
             error: null,
+            form: new BMTMForm({})
         };
     },
 
@@ -42,6 +43,51 @@ Vue.component('publisher-profile', {
          */
         editStat(stat) {
             Bus.$emit('editStat', stat);
+        },
+
+        /**
+         * Upload the publisher's stats.
+         */
+        uploadStats(e) {
+            e.preventDefault();
+
+            var self = this;
+
+            this.form.startProcessing();
+
+            // We need to gather a fresh FormData instance with the profile photo appended to
+            // the data so we can POST it up to the server. This will allow us to do async
+            // uploads of the profile photos. We will update the department after this action.
+            $.ajax({
+                url: `/admin/publisher/${this.publisher.id}/upload_stats`,
+                data: this.gatherFormData(),
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                headers: {
+                    'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
+                },
+                success: function () {
+                    Bus.$emit('showPublisherProfile', self.publisher.id);
+
+                    self.form.finishProcessing();
+                },
+                error: function (error) {
+                    self.form.setErrors(error.responseJSON);
+                }
+            });
+        },
+
+        /**
+         * Gather the form data for the stats upload.
+         */
+        gatherFormData() {
+            const data = new FormData();
+
+            data.append('stats', this.$refs.stats.files[0]);
+
+            return data;
         },
 
         /**

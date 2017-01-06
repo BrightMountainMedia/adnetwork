@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Stats;
 use App\Http\Requests;
 use App\Http\Requests\AddRoleRequest;
 use App\Http\Requests\AddStatsRequest;
 use App\Http\Requests\UpdateStatsRequest;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -106,5 +108,43 @@ class AdminController extends Controller
         $publisher = User::find($request->user_id);
 
         return response()->json(['publisher' => $publisher]);
+    }
+
+    /**
+     * Store the user's profile photo.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadStats(Request $request, $id)
+    {
+        $path = Storage::putFile('public/stats', $request->file('stats'));
+        $path = str_replace('public', 'storage', $path);
+        echo "ID: ".$id."<br/>";
+        Excel::load($path, function($reader) use ($id) {
+            $reader->each(function($sheet) use ($id) {
+                $date = explode('/', $sheet->date);
+                $year = $date[2];
+                $month = $date[0];
+                $day = $date[1];
+                $date = Carbon::createFromDate($year, $month, $day);
+                $site = $sheet->site;
+                $impressions = $sheet->impressions;
+                $served = $sheet->served;
+                $income = $sheet->income;
+                $tag = $sheet->tag;
+
+                Stats::insert([
+                    'user_id' => $id,
+                    'date' => $date,
+                    'site' => $site,
+                    'impressions' => $impressions,
+                    'served' => $served,
+                    'income' => $income,
+                    'tag' => $tag
+                ]);
+            });
+        });
     }
 }

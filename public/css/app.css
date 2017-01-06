@@ -5777,6 +5777,17 @@ button.close {
 .m-b-none {
   margin-bottom: 0; }
 
+.btn-upload {
+  width: 100%; }
+  .btn-upload input[type="file"] {
+    cursor: pointer;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0; }
+
 .admin-settings-stacked-tabs {
   border-radius: 4px;
   font-weight: 300; }

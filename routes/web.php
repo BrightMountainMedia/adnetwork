@@ -29,13 +29,15 @@ Route::get('/admin/publisher/{id}/publisher_profile', 'AdminController@show');
 Route::post('/admin/publisher/add_stat', 'AdminController@storeStat');
 Route::put('/admin/stat/{id}/edit_stat', 'AdminController@updateStat');
 
-Route::get('/admin/add-user-role', ['as' => 'role', 'uses' => 'RoleController@create']);
-Route::post('/admin/add-user-role', ['as' => 'role.store', 'uses' => 'RoleController@store']);
-Route::post('/admin/add-user-role/{id}', 'RoleController@destroy');
+Route::post('/admin/publisher/{id}/upload_stats', 'AdminController@uploadStats');
 
-Route::get('/admin/add-stats', 'StatsController@index');
-Route::get('/admin/add-stats/{id}/publisher_profile', 'StatsController@profile');
-Route::post('/admin/add-stats/add_stats', 'StatsController@store');
+// Route::get('/admin/add-user-role', ['as' => 'role', 'uses' => 'RoleController@create']);
+// Route::post('/admin/add-user-role', ['as' => 'role.store', 'uses' => 'RoleController@store']);
+// Route::post('/admin/add-user-role/{id}', 'RoleController@destroy');
+
+// Route::get('/admin/add-stats', 'StatsController@index');
+// Route::get('/admin/add-stats/{id}/publisher_profile', 'StatsController@profile');
+// Route::post('/admin/add-stats/add_stats', 'StatsController@store');
 // Route::put('/admin/add-stats/{id}/stats_update', 'StatsController@update');
 
 Route::get('/profile', ['as' => 'profile', 'uses' => 'ProfileController@create']);

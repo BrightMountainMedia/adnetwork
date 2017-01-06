@@ -27,6 +27,21 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-default panel-flush">
+                        <div class="alert alert-danger" v-if="form.errors.has('stats')">
+                            @{{ form.errors.get('stats') }}
+                        </div>
+
+                        <form class="form-horizontal" role="form">
+                            {{ csrf_field() }}
+                            <label type="button" class="btn btn-primary btn-upload" :disabled="form.busy">
+                                <i class="fa fa-cloud-upload"></i> Upload Stats
+
+                                <input ref="stats" type="file" class="form-control" name="stats" @change="uploadStats">
+                            </label>
+                        </form>
+                    </div>
+
+                    <div class="panel panel-default panel-flush">
                         <!-- Create Button -->
                         <button type="submit" class="btn btn-primary btn-block" @click="addStat()">
                             <i class="fa fa-plus"></i> Add Stat
