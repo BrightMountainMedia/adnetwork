@@ -31,9 +31,11 @@
                                 <td style="font-weight: bold;">{{ $stat->tag }}</td>
                                 <td style="font-weight: bold;">{{ $stat->impressions }}</td>
                                 <td style="font-weight: bold;">{{ $stat->served }}</td>
-                                <td style="font-weight: bold;">{{ $stat->fill }}%</td>
+                                <!-- <td style="font-weight: bold;">{{ $stat->fill }}%</td> -->
+                                <td style="font-weight: bold;">{{ number_format($stat->served / $stat->impressions * 100, 2, '.', '') }}%</td>
                                 <td style="font-weight: bold;">${{ $stat->income }}</td>
-                                <td style="font-weight: bold;">${{ $stat->ecpm }}</td>
+                                <!-- <td style="font-weight: bold;">${{ $stat->ecpm }}</td> -->
+                                <td style="font-weight: bold;">${{ number_format($stat->income / $stat->served * 1000, 2, '.', '') }}</td>
                             </tr>
                             @else
                             <tr>
@@ -42,9 +44,11 @@
                                 <td>{{ $stat->tag }}</td>
                                 <td>{{ $stat->impressions }}</td>
                                 <td>{{ $stat->served }}</td>
-                                <td>{{ $stat->fill }}%</td>
+                                <!-- <td>{{ $stat->fill }}%</td> -->
+                                <td>{{ number_format($stat->served / $stat->impressions * 100, 2, '.', '') }}%</td>
                                 <td>${{ $stat->income }}</td>
-                                <td>${{ $stat->ecpm }}</td>
+                                <!-- <td>${{ $stat->ecpm }}</td> -->
+                                <td>${{ number_format($stat->income / $stat->served * 1000, 2, '.', '') }}</td>
                             </tr>
                             @endif
                             @endforeach
