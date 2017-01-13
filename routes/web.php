@@ -23,22 +23,19 @@ Route::post('/support/email', 'SupportController@sendEmail');
 // Front-End Pages
 Route::get('/dashboard', 'DashboardController@index');
 
+// Admin Pages
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/publishers', 'AdminController@allPublishers');
-Route::get('/admin/publisher/{id}/publisher_profile', 'AdminController@show');
+Route::get('/admin/publisher/{id}/publisher_profile', 'AdminController@showPublisher');
 Route::post('/admin/publisher/add_stat', 'AdminController@storeStat');
 Route::put('/admin/stat/{id}/edit_stat', 'AdminController@updateStat');
-
 Route::post('/admin/publisher/{id}/upload_stats', 'AdminController@uploadStats');
-
-// Route::get('/admin/add-user-role', ['as' => 'role', 'uses' => 'RoleController@create']);
-// Route::post('/admin/add-user-role', ['as' => 'role.store', 'uses' => 'RoleController@store']);
-// Route::post('/admin/add-user-role/{id}', 'RoleController@destroy');
-
-// Route::get('/admin/add-stats', 'StatsController@index');
-// Route::get('/admin/add-stats/{id}/publisher_profile', 'StatsController@profile');
-// Route::post('/admin/add-stats/add_stats', 'StatsController@store');
-// Route::put('/admin/add-stats/{id}/stats_update', 'StatsController@update');
+Route::get('/admin/articles', 'AdminController@allArticles');
+Route::get('/admin/article/{id}/article_profile', 'AdminController@showArticle');
+Route::post('/admin/article/add_article', 'AdminController@storeArticle');
+Route::put('/admin/article/{id}/edit_article', 'AdminController@updateArticle');
+Route::get('/admin/widget_settings', 'AdminController@widgetSettings');
+Route::put('/admin/widget/widget_settings_update', 'AdminController@updateWidgetSettings');
 
 Route::get('/profile', ['as' => 'profile', 'uses' => 'ProfileController@create']);
 Route::post('/profile', ['as' => 'profile_store', 'uses' => 'ProfileController@store']);

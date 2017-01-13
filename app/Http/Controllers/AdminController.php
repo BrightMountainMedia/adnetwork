@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Stats;
+use App\Article;
+use App\Settings;
 use App\Http\Requests;
 use App\Http\Requests\AddRoleRequest;
 use App\Http\Requests\AddStatsRequest;
 use App\Http\Requests\UpdateStatsRequest;
+use App\Http\Requests\AddArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use App\Http\Requests\UpdateWidgetSettingsRequest;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
@@ -49,6 +54,47 @@ class AdminController extends Controller
     }
 
     /**
+     * Get all articles.
+     *
+     * @return Response
+     */
+    public function allArticles()
+    {
+        $articles = Article::where('status', 1)->get();
+
+        return response()->json(['articles' => $articles]);
+    }
+
+    /**
+     * Get widget settings.
+     *
+     * @return Response
+     */
+    public function widgetSettings()
+    {
+        $widget_title = Settings::where('name', 'widget_title')->first();
+        $widget_count = Settings::where('name', 'widget_count')->first();
+
+        $articles = Article::where('status', 1)->orderBy('id', 'desc')->limit($widget_count->value)->get();
+
+        return response()->json(['widget_title' => $widget_title, 'widget_count' => $widget_count, 'articles' => $articles]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showPublisher($id)
+    {
+        $publisher = User::find($id);
+        $stats = Stats::where('user_id', $id)->orderBy('date', 'DESC')->orderBy('id', 'DESC')->get();
+
+        return response()->json(['publisher' => $publisher, 'stats' => $stats]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -69,20 +115,6 @@ class AdminController extends Controller
         $publisher = User::find($request->user_id);
 
         return response()->json(['publisher' => $publisher]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $publisher = User::find($id);
-        $stats = Stats::where('user_id', $id)->orderBy('date', 'DESC')->orderBy('id', 'DESC')->get();
-
-        return response()->json(['publisher' => $publisher, 'stats' => $stats]);
     }
 
     /**
@@ -111,7 +143,63 @@ class AdminController extends Controller
     }
 
     /**
-     * Store the user's profile photo.
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeArticle(AddArticleRequest $request)
+    {
+        if ( $request->image ) {
+            $path = Storage::putFile('public/articles', $request->file('image'));
+            $path = str_replace('public', 'storage', $path);
+        } else {
+            $path = $request->image_url;
+        }
+
+        $article = new Article;
+
+        $article->image_url = $path;
+        $article->title = $request->title;
+        $article->permalink = $request->permalink;
+        $article->stats = json_encode(array(''));
+        $article->status = 1;
+
+        $article->save();
+
+        return response()->json(['article' => $article]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Department\UpdateDepartmentRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateArticle(UpdateArticleRequest $request, $id)
+    {
+        if ( $request->image ) {
+            $path = Storage::putFile('public/articles', $request->file('image'));
+            $path = str_replace('public', 'storage', $path);
+        } else {
+            $path = $request->image_url;
+        }
+
+        $article = Article::find($id);
+
+        $article->image_url = $path;
+        $article->title = $request->title;
+        $article->permalink = $request->permalink;
+        $article->status = $request->status;
+
+        $article->save();
+
+        return response()->json(['article' => $article]);
+    }
+
+    /**
+     * Upload the publishers stats.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -146,5 +234,33 @@ class AdminController extends Controller
                 ]);
             });
         });
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Department\UpdateDepartmentRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateWidgetSettings(UpdateWidgetSettingsRequest $request)
+    {
+        $widget_title = Settings::updateOrCreate(
+            ['name' => 'widget_title'],
+            ['name' => 'widget_title', 'value' => $request->title]
+        );
+
+        $widget_count = Settings::updateOrCreate(
+            ['name' => 'widget_count'],
+            ['name' => 'widget_count', 'value' => $request->count]
+        );
+
+        if ( $widget_count->value == $request->count && $widget_title->value == $request->title ) {
+            $articles = Article::where('status', 1)->orderBy('id', 'desc')->limit($widget_count->value)->get();
+
+            return response()->json(['successful' => true, 'title' => $widget_title, 'articles' => $articles]);
+        }
+
+        return response()->json(['error' => true]);
     }
 }

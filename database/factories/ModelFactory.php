@@ -2,6 +2,7 @@
 
 use App\User;
 use App\Stats;
+use App\Article;
 use Carbon\Carbon;
 
 /*
@@ -38,10 +39,19 @@ $factory->define(Stats::class, function (Faker\Generator $faker) {
         'site' => $faker->randomElement($array = array ('lawofficer.com','article107news.com','havokjournal.com')),
         'impressions' => $faker->numberBetween($min = 50, $max = 100000),
         'served' => $faker->numberBetween($min = 0, $max = 50000),
-        'fill' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
         'income' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 4),
-        'ecpm' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 4),
         'tag' => $faker->randomElement($array = array ('Lawofficer.com Top 320×50 Mobile','Lawofficer.com Bottom 728×90 Desktop','Lawofficer.com ROS 300×250 Desktop')),
+        'updated_at' => Carbon::now(),
+        'created_at' => Carbon::now(),
+    ];
+});
+
+$factory->define(Article::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+        'image_url' => $faker->imageUrl($width = 640, $height = 480),
+        'permalink' => $faker->url,
+        'stats' => json_encode(array("site" => "$faker->domainName", "impressions" => $faker->numberBetween($min = 50, $max = 100000), "clicks" => $faker->numberBetween($min = 0, $max = 20000) ) ),
         'updated_at' => Carbon::now(),
         'created_at' => Carbon::now(),
     ];

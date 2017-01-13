@@ -12,28 +12,9 @@ Vue.component('admin-settings', {
     data() {
         return {
             publishers: [],
+
+            showingArticles: false,
         };
-    },
-
-    /**
-     * The component has been created by Vue.
-     */
-    created() {
-        var self = this;
-
-        Bus.$on('hashChanged', function (hash, parameters) {
-            if (hash != 'admin') {
-                return true;
-            }
-
-            if (parameters && parameters.length > 0) {
-                self.loadPublisherProfile({ id: parameters[0] });
-            }  else {
-                self.showPublishers();
-            }
-
-            return true;
-        });
     },
 
     /**

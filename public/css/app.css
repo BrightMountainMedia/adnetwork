@@ -5844,4 +5844,70 @@ li.list-group-item:hover {
   color: #fff;
   cursor: pointer; }
 
+.article-container {
+  width: 100%;
+  border: 1px solid #f1f1f1;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 20px; }
+  .article-container .article-image {
+    width: 100%;
+    cursor: pointer; }
+  .article-container .article-title {
+    font-size: 16px;
+    line-height: 1.3;
+    -webkit-font-smoothing: antialiased;
+    color: #000; }
+  .article-container .article-title:hover {
+    color: #19abff;
+    cursor: pointer; }
+
+/********************************************
+ ************ Widget Styles *****************
+ ********************************************/
+.widget {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #f1f1f1;
+  padding: 20px;
+  box-sizing: border-box; }
+  .widget h2, .widget h3 {
+    margin: 0; }
+  .widget h2.widget-title {
+    font-family: 'Source Sans Pro', sans-serif, uppercase;
+    color: #000;
+    text-transform: uppercase;
+    width: auto;
+    padding: 7px 25px 10px 0;
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: .5px;
+    margin: 0px;
+    display: inline-block;
+    border-bottom: 3px solid #1f31c9;
+    display: inline-block;
+    margin: 0px 0px -1px 0px; }
+  .widget .widget-content {
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 5px; }
+    .widget .widget-content .widget-article {
+      border-top: 1px solid #e6e6e6;
+      padding-top: 20px;
+      margin-bottom: 6px; }
+      .widget .widget-content .widget-article .article-image {
+        margin-bottom: 7px; }
+        .widget .widget-content .widget-article .article-image img {
+          width: 100%; }
+      .widget .widget-content .widget-article .article-title {
+        font-size: 16px;
+        line-height: 1.3;
+        -webkit-font-smoothing: antialiased; }
+        .widget .widget-content .widget-article .article-title a {
+          color: #000; }
+        .widget .widget-content .widget-article .article-title a:hover {
+          color: #19abff;
+          text-decoration: none; }
+
 /*# sourceMappingURL=app.css.map */

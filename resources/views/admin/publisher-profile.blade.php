@@ -95,9 +95,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Update Publisher Information -->
-                    @include('admin.update-publisher-info')
                 </div>
             </div>
         </div>
@@ -110,4 +107,4 @@
             @include('admin.modals.edit-stat')
         </div>
     </div>
-</department-profile>
+</publisher-profile>

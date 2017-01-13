@@ -26,19 +26,26 @@
                     <div class="panel-body">
                         <div class="admin-settings-tabs">
                             <ul class="nav admin-settings-stacked-tabs" role="tablist">
-                                <!-- Roles Link -->
-                                <!-- <li role="presentation">
-                                    <a href="#role" aria-controls="role" role="tab" data-toggle="tab">
-                                        <i class="fa fa-fw fa-btn fa-group"></i> Roles
-                                    </a>
-                                </li> -->
-
                                 <!-- Publishers Link -->
                                 <li role="presentation" v-show="publishers[0]">
                                     <a href="#publisher" aria-controls="publisher" role="tab" data-toggle="tab">
                                         <i class="fa fa-fw fa-btn fa-user-plus"></i> Publishers
                                     </a>
                                 </li>
+
+                                <!-- Widget Link -->
+                                <!-- <li role="presentation">
+                                    <a href="#widget" aria-controls="widget" role="tab" data-toggle="tab">
+                                        <i class="fa fa-fw fa-btn fa-qrcode"></i> Widget
+                                    </a>
+                                </li> -->
+
+                                <!-- Widget Link -->
+                                <!-- <li role="presentation">
+                                    <a href="#article" aria-controls="article" role="tab" data-toggle="tab">
+                                        <i class="fa fa-fw fa-btn fa-newspaper-o"></i> Articles
+                                    </a>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -48,15 +55,20 @@
             <!-- Tab Panels -->
             <div class="col-md-8">
                 <div class="tab-content">
-                    <!-- Roles -->
-                    <!-- <div role="tabpanel" class="tab-pane active" id="role">
-                        @include('admin.roles')
-                    </div> -->
-
                     <!-- Publishers -->
                     <div role="tabpanel" class="tab-pane active" id="publisher" v-show="publishers[0]">
                         @include('admin.publishers')
                     </div>
+
+                    <!-- Widget Settings -->
+                    <!-- <div role="tabpanel" class="tab-pane active" id="widget">
+                        
+                    </div> -->
+
+                    <!-- Articles -->
+                    <!-- <div role="tabpanel" class="tab-pane" id="article">
+                        
+                    </div> -->
                 </div>
             </div>
         </div>

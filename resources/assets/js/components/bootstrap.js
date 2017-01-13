@@ -10,9 +10,17 @@
 
 // Admin
 require('./admin/admin-settings');
+
 require('./admin/publishers');
 require('./admin/publisher-profile');
-require('./admin/add-publisher');
-require('./admin/add-stat');
-require('./admin/edit-stat');
-require('./admin/stats');
+require('./admin/modals/add-publisher');
+
+require('./admin/modals/add-stat');
+require('./admin/modals/edit-stat');
+
+require('./admin/articles');
+require('./admin/article-profile');
+require('./admin/modals/add-article');
+require('./admin/modals/edit-article');
+
+require('./admin/widget-settings');
