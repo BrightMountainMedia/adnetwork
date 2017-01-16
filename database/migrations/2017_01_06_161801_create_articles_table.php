@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->text('image_url')->nullable();
             $table->string('title');
             $table->string('permalink', 510);
-            $table->text('stats');
+            $table->text('stats')->nullable();
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
