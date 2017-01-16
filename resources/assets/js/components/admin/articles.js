@@ -4,7 +4,8 @@ Vue.component('articles', {
      */
     data() {
         return {
-            articles: [],
+            widgetArticles: [],
+            otherArticles: [],
         };
     },
 
@@ -14,8 +15,12 @@ Vue.component('articles', {
     created() {
         var self = this;
 
-        Bus.$on('getArticles', function () {
-            self.getArticles();
+        Bus.$on('updateWidgetArticles', function () {
+            self.getWidgetArticles();
+        });
+
+        Bus.$on('updateOtherArticles', function () {
+            self.getOtherArticles();
         });
     },
 
@@ -23,7 +28,8 @@ Vue.component('articles', {
      * Prepare the component.
      */
     mounted() {
-        this.getArticles();
+        this.getWidgetArticles();
+        this.getOtherArticles();
     },
 
     methods: {
@@ -42,12 +48,22 @@ Vue.component('articles', {
         },
 
         /**
-         * Get the articles
+         * Get the widget articles
          */
-        getArticles() {
-            this.$http.get('/admin/articles')
+        getWidgetArticles() {
+            this.$http.get('/admin/widget_articles')
                 .then(response => {
-                    this.articles = response.data.articles;
+                    this.widgetArticles = response.data.articles;
+                });
+        },
+
+        /**
+         * Get the other articles
+         */
+        getOtherArticles() {
+            this.$http.get('/admin/other_articles')
+                .then(response => {
+                    this.otherArticles = response.data.articles;
                 });
         }
     }

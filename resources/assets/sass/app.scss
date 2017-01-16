@@ -15,6 +15,10 @@ $white: #fff;
 	box-sizing: border-box;
 }
 
+.clear {
+    clear: both;
+}
+
 .panel-flush {
 	.panel-header,
 	.panel-body {
@@ -119,10 +123,12 @@ li.list-group-item:hover {
 
 .article-container {
     width: 100%;
+    max-width: 300px;
     border: 1px solid #f1f1f1;
     padding: 20px;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin: 20px;
+    float: left;
 
     .article-image {
         width: 100%;

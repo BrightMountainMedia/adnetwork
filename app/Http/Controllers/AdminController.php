@@ -54,13 +54,26 @@ class AdminController extends Controller
     }
 
     /**
-     * Get all articles.
+     * Get all widget articles.
      *
      * @return Response
      */
-    public function allArticles()
+    public function widgetArticles()
     {
-        $articles = Article::where('status', 1)->get();
+        $widget_count = Settings::where('name', 'widget_count')->first();
+        $articles = Article::widget()->active()->orderBy('id', 'desc')->get();
+
+        return response()->json(['articles' => $articles]);
+    }
+
+    /**
+     * Get all other articles.
+     *
+     * @return Response
+     */
+    public function otherArticles()
+    {
+        $articles = Article::nonwidget()->active()->orderBy('id', 'desc')->get();
 
         return response()->json(['articles' => $articles]);
     }
@@ -75,7 +88,7 @@ class AdminController extends Controller
         $widget_title = Settings::where('name', 'widget_title')->first();
         $widget_count = Settings::where('name', 'widget_count')->first();
 
-        $articles = Article::where('status', 1)->orderBy('id', 'desc')->limit($widget_count->value)->get();
+        $articles = Article::widget()->active()->orderBy('id', 'desc')->limit($widget_count->value)->get();
 
         return response()->json(['widget_title' => $widget_title, 'widget_count' => $widget_count, 'articles' => $articles]);
     }
@@ -186,12 +199,53 @@ class AdminController extends Controller
             $path = $request->image_url;
         }
 
+        $widget_count = Settings::where('name', 'widget_count')->first();
+        $articles_in_widget = Article::widget()->active()->count();
+
+        if ( $request->widget == 1 && $articles_in_widget == $widget_count->value ) {
+            return response()->json(['confirm' => 'There are already the max allowed articles within the widget, if you proceed, we will remove the oldest article from the widget and add this one.', 'request' => $request->all(), 'article_id' => $id]);
+        }
+
         $article = Article::find($id);
 
         $article->image_url = $path;
         $article->title = $request->title;
         $article->permalink = $request->permalink;
-        $article->status = $request->status;
+        $article->widget = $request->widget;
+        $article->active = $request->active;
+
+        $article->save();
+
+        return response()->json(['article' => $article]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Department\UpdateDepartmentRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateConfirmedArticle(Request $request, $id)
+    {
+        if ( $request->image ) {
+            $path = Storage::putFile('public/articles', $request->file('image'));
+            $path = str_replace('public', 'storage', $path);
+        } else {
+            $path = $request->image_url;
+        }
+        
+        $oldest_article = Article::widget()->active()->oldest()->first();
+        $oldest_article->widget = 0;
+        $oldest_article->save();
+
+        $article = Article::find($id);
+
+        $article->image_url = $path;
+        $article->title = $request->title;
+        $article->permalink = $request->permalink;
+        $article->widget = $request->widget;
+        $article->active = $request->active;
 
         $article->save();
 

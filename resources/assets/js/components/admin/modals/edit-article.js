@@ -5,7 +5,8 @@ function adminEditArticleForm (article) {
             image_url: article.image_url,
             title: article.title,
             permalink: article.permalink,
-            status: article.status,
+            widget: article.widget,
+            active: article.active,
         };
     } else {
         return {
@@ -13,7 +14,8 @@ function adminEditArticleForm (article) {
             image_url: '',
             title: '',
             permalink: '',
-            status: 0,
+            widget: 0,
+            active: 0,
         };
     }
 }
@@ -26,9 +28,13 @@ Vue.component('edit-article', {
         return {
             editingArticle: false,
 
-            status_options: [
+            active_options: [
                 { text: 'Active', value: '1' },
                 { text: 'Not Active', value: '0' }
+            ],
+            widget_options: [
+                { text: 'In Widget', value: '1' },
+                { text: 'Not In Widget', value: '0' }
             ],
 
             articleForm: new BMTMForm(adminEditArticleForm())
@@ -57,12 +63,39 @@ Vue.component('edit-article', {
         saveArticle() {
             this.$http.put('/admin/article/' + this.articleForm.article_id + '/edit_article', this.articleForm)
                 .then(response => {
-                    this.editingArticle = false;
+                    if ( response.data.confirm ) {
+                        var result = window.confirm(response.data.confirm);
+                        if ( result == true ) {
+                            this.$http.put('/admin/confirmed/article/' + response.data.article_id + '/edit_article', response.data.request)
+                                .then(response => {
+                                    this.editingArticle = false;
 
-                    $('#modal-edit-article').modal('hide');
+                                    $('#modal-edit-article').modal('hide');
 
-                    Bus.$emit('getArticles');
-                    Bus.$emit('updateWidgetSettings');
+                                    Bus.$emit('updateWidgetArticles');
+                                    Bus.$emit('updateOtherArticles');
+                                    Bus.$emit('updateWidgetSettings');
+                                });
+                        } else {
+                            this.editingArticle = false;
+
+                            $('#modal-edit-article').modal('hide');
+
+                            Bus.$emit('updateWidgetArticles');
+                            Bus.$emit('updateOtherArticles');
+                            Bus.$emit('updateWidgetSettings');
+                        }
+                    }
+
+                    if ( response.data.article ) {
+                        this.editingArticle = false;
+
+                        $('#modal-edit-article').modal('hide');
+
+                        Bus.$emit('updateWidgetArticles');
+                        Bus.$emit('updateOtherArticles');
+                        Bus.$emit('updateWidgetSettings');
+                    }
                 });
         }
     }

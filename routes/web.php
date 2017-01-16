@@ -30,10 +30,12 @@ Route::get('/admin/publisher/{id}/publisher_profile', 'AdminController@showPubli
 Route::post('/admin/publisher/add_stat', 'AdminController@storeStat');
 Route::put('/admin/stat/{id}/edit_stat', 'AdminController@updateStat');
 Route::post('/admin/publisher/{id}/upload_stats', 'AdminController@uploadStats');
-Route::get('/admin/articles', 'AdminController@allArticles');
+Route::get('/admin/widget_articles', 'AdminController@widgetArticles');
+Route::get('/admin/other_articles', 'AdminController@otherArticles');
 Route::get('/admin/article/{id}/article_profile', 'AdminController@showArticle');
 Route::post('/admin/article/add_article', 'AdminController@storeArticle');
 Route::put('/admin/article/{id}/edit_article', 'AdminController@updateArticle');
+Route::put('/admin/confirmed/article/{id}/edit_article', 'AdminController@updateConfirmedArticle');
 Route::get('/admin/widget_settings', 'AdminController@widgetSettings');
 Route::put('/admin/widget/widget_settings_update', 'AdminController@updateWidgetSettings');
 

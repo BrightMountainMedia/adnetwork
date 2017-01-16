@@ -9,27 +9,30 @@
 
         <!-- List all Articles -->
         <div class="panel panel-default">
-            <div class="panel-heading">Articles</div>
+            <div class="panel-heading">Articles (In Widget)</div>
 
             <div class="panel-body">
-                <div class="col-sm-6">
-                    <article class="article-container" v-for="(article, index) in articles" v-if="index < (articles.length / 2)">
-                        <img class="article-image" :src="
-                        article.image_url" :alt="article.title" @click="editArticle(article)" />
-                        <h3 class="article-title" @click="editArticle(article)">
-                            @{{ article.title }}
-                        </h3>
-                    </article>
-                </div>
-                <div class="col-sm-6">
-                    <article class="article-container" v-for="(article, index) in articles" v-if="index >= (articles.length / 2)">
-                        <img class="article-image" :src="
-                        article.image_url" :alt="article.title" @click="editArticle(article)" />
-                        <h3 class="article-title" @click="editArticle(article)">
-                            @{{ article.title }}
-                        </h3>
-                    </article>
-                </div>
+                <article class="article-container" v-for="article in widgetArticles">
+                    <img class="article-image" :src="
+                    article.image_url" :alt="article.title" @click="editArticle(article)" />
+                    <h3 class="article-title" @click="editArticle(article)">
+                        @{{ article.title }}
+                    </h3>
+                </article>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Articles (Other)</div>
+
+            <div class="panel-body">
+                <article class="article-container" v-for="article in otherArticles">
+                    <img class="article-image" :src="
+                    article.image_url" :alt="article.title" @click="editArticle(article)" />
+                    <h3 class="article-title" @click="editArticle(article)">
+                        @{{ article.title }}
+                    </h3>
+                </article>
             </div>
         </div>
 

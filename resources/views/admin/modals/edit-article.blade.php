@@ -61,19 +61,38 @@
 
                             <div class="clearfix"></div>
 
-                            <!-- Status -->
-                            <div class="form-group" :class="{'has-error': articleForm.errors.has('status')}">
-                                <label class="col-sm-4 control-label">Status</label>
+                            <!-- Widget -->
+                            <div class="form-group" :class="{'has-error': articleForm.errors.has('widget')}">
+                                <label class="col-sm-4 control-label">Widget</label>
 
                                 <div class="col-sm-8">
-                                    <select class="form-control" name="status" v-model="articleForm.status">
-                                        <option v-for="status_option in status_options" v-bind:value="status_option.value">
-                                            @{{ status_option.text }}
+                                    <select class="form-control" name="widget" v-model="articleForm.widget">
+                                        <option v-for="widget_option in widget_options" v-bind:value="widget_option.value">
+                                            @{{ widget_option.text }}
                                         </option>
                                     </select>
 
-                                    <span class="help-block" v-show="articleForm.errors.has('status')">
-                                        @{{ articleForm.errors.get('status') }}
+                                    <span class="help-block" v-show="articleForm.errors.has('widget')">
+                                        @{{ articleForm.errors.get('widget') }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <!-- Active -->
+                            <div class="form-group" :class="{'has-error': articleForm.errors.has('active')}">
+                                <label class="col-sm-4 control-label">Active</label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="active" v-model="articleForm.active">
+                                        <option v-for="active_option in active_options" v-bind:value="active_option.value">
+                                            @{{ active_option.text }}
+                                        </option>
+                                    </select>
+
+                                    <span class="help-block" v-show="articleForm.errors.has('active')">
+                                        @{{ articleForm.errors.get('active') }}
                                     </span>
                                 </div>
                             </div>

@@ -55,6 +55,9 @@ Vue.component('widget-settings', {
                         this.form.successful = true;
                         this.title = response.data.title.value;
                         this.articles = response.data.articles;
+                        
+                        Bus.$emit('updateWidgetArticles');
+                        Bus.$emit('updateOtherArticles');
                     } else if ( response.data.error ) {
                         this.form.error = true;
                     }

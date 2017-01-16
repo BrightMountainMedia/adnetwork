@@ -23,4 +23,37 @@ class Article extends Model
     protected $hidden = [
         //
     ];
+
+    /**
+     * Scope a query to only include active articles.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
+
+    /**
+     * Scope a query to only include widget articles.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWidget($query)
+    {
+        return $query->where('widget', 1);
+    }
+
+    /**
+     * Scope a query to only include non-widget articles.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeNonWidget($query)
+    {
+        return $query->where('widget', 0);
+    }
 }
