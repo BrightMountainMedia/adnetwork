@@ -310,7 +310,7 @@ class AdminController extends Controller
         );
 
         if ( $widget_count->value == $request->count && $widget_title->value == $request->title ) {
-            $articles = Article::where('status', 1)->orderBy('id', 'desc')->limit($widget_count->value)->get();
+            $articles = Article::active()->widget()->limit($widget_count->value)->get();
 
             return response()->json(['successful' => true, 'title' => $widget_title, 'articles' => $articles]);
         }
