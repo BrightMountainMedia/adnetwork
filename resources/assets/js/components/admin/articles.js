@@ -53,7 +53,7 @@ Vue.component('articles', {
         getWidgetArticles() {
             this.$http.get('/api/widget_articles')
                 .then(response => {
-                    this.widgetArticles = response.data.articles;
+                    this.widgetArticles = response.data;
                 });
         },
 
