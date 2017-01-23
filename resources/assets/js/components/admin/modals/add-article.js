@@ -43,6 +43,9 @@ Vue.component('add-article', {
                 .then(response => {
                     this.addingArticle = false;
                     $('#modal-add-article').modal('hide');
+                    
+                    Bus.$emit('updateWidgetArticles');
+                    Bus.$emit('updateOtherArticles');
                 });
         }
     }
