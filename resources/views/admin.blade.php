@@ -34,18 +34,18 @@
                                 </li>
 
                                 <!-- Widget Link -->
-                                <!-- <li role="presentation">
+                                <li role="presentation">
                                     <a href="#widget" aria-controls="widget" role="tab" data-toggle="tab">
                                         <i class="fa fa-fw fa-btn fa-qrcode"></i> Widget
                                     </a>
-                                </li> -->
+                                </li>
 
                                 <!-- Widget Link -->
-                                <!-- <li role="presentation">
+                                <li role="presentation">
                                     <a href="#article" aria-controls="article" role="tab" data-toggle="tab">
                                         <i class="fa fa-fw fa-btn fa-newspaper-o"></i> Articles
                                     </a>
-                                </li> -->
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -61,14 +61,14 @@
                     </div>
 
                     <!-- Widget Settings -->
-                    <!-- <div role="tabpanel" class="tab-pane active" id="widget">
-                        
-                    </div> -->
+                    <div role="tabpanel" class="tab-pane active" id="widget">
+                        @include('admin.widget-settings')
+                    </div>
 
                     <!-- Articles -->
-                    <!-- <div role="tabpanel" class="tab-pane" id="article">
-                        
-                    </div> -->
+                    <div role="tabpanel" class="tab-pane" id="article">
+                        @include('admin.articles')
+                    </div>
                 </div>
             </div>
         </div>

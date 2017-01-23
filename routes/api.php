@@ -1,5 +1,7 @@
 <?php
 
+use App\Article;
+use App\Settings;
 use Illuminate\Http\Request;
 
 /*
@@ -15,4 +17,20 @@ use Illuminate\Http\Request;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:api');
+});
+
+Route::get('/widget_title', function (Request $request) {
+    $widget_title = Settings::where('name', 'widget_title')->first();
+    return $widget_title->value;
+});
+
+Route::get('/widget_count', function (Request $request) {
+    $widget_count = Settings::where('name', 'widget_count')->first();
+    return $widget_count->value;
+});
+
+Route::get('/widget_articles', function (Request $request) {
+    $widget_count = Settings::where('name', 'widget_count')->first();
+    $articles = Article::widget()->active()->orderBy('id', 'desc')->limit($widget_count->value)->get();
+    return $articles;
+});

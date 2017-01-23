@@ -50,6 +50,16 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="panel panel-default api">
+                <div class="panel-heading">API Tokens</div>
+
+                <div class="panel-body">
+                    <passport-clients></passport-clients>
+                    <passport-authorized-clients></passport-authorized-clients>
+                    <passport-personal-access-tokens></passport-personal-access-tokens>
+                </div>
+            </div>
         </div>
     </div>
 </div>

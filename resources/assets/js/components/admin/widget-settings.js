@@ -37,11 +37,19 @@ Vue.component('widget-settings', {
          * Get the widget settings
          */
         getWidgetSettings() {
-            this.$http.get('/admin/widget_settings')
+            this.$http.get('/api/widget_title')
                 .then(response => {
-                    this.form.title = this.title = response.data.widget_title.value;
-                    this.form.count = response.data.widget_count.value;
-                    this.articles = response.data.articles;
+                    this.form.title = this.title = response.data;
+                });
+
+            this.$http.get('/api/widget_count')
+                .then(response => {
+                    this.form.count = response.data;
+                });
+
+            this.$http.get('/api/widget_articles')
+                .then(response => {
+                    this.articles = response.data;
                 });
         },
 

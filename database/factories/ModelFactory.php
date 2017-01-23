@@ -52,6 +52,7 @@ $factory->define(Article::class, function (Faker\Generator $faker) {
         'image_url' => $faker->imageUrl($width = 640, $height = 480),
         'permalink' => $faker->url,
         'stats' => json_encode(array("site" => "$faker->domainName", "impressions" => $faker->numberBetween($min = 50, $max = 100000), "clicks" => $faker->numberBetween($min = 0, $max = 20000) ) ),
+        'widget' => 1,
         'active' => 1,
         'updated_at' => Carbon::now(),
         'created_at' => Carbon::now(),
