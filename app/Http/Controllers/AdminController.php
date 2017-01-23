@@ -176,7 +176,7 @@ class AdminController extends Controller
         $article->title = $request->title;
         $article->permalink = $request->permalink;
         $article->stats = json_encode(array(''));
-        $article->status = 1;
+        $article->active = 1;
 
         $article->save();
 

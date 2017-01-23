@@ -51,7 +51,7 @@ Vue.component('articles', {
          * Get the widget articles
          */
         getWidgetArticles() {
-            this.$http.get('/admin/widget_articles')
+            this.$http.get('/api/widget_articles')
                 .then(response => {
                     this.widgetArticles = response.data.articles;
                 });
