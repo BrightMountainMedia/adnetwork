@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<admin-settings :user="user" inline-template>
+<admin-settings inline-template>
     <div class="container">
         <div class="row">
             @if(Session::has('error'))
@@ -27,7 +27,7 @@
                         <div class="admin-settings-tabs">
                             <ul class="nav admin-settings-stacked-tabs" role="tablist">
                                 <!-- Publishers Link -->
-                                <li role="presentation" v-show="publishers[0]">
+                                <li role="presentation">
                                     <a href="#publisher" aria-controls="publisher" role="tab" data-toggle="tab">
                                         <i class="fa fa-fw fa-btn fa-user-plus"></i> Publishers
                                     </a>
@@ -56,7 +56,7 @@
             <div class="col-md-8">
                 <div class="tab-content">
                     <!-- Publishers -->
-                    <div role="tabpanel" class="tab-pane active" id="publisher" v-show="publishers[0]">
+                    <div role="tabpanel" class="tab-pane active" id="publisher">
                         @include('admin.publishers')
                     </div>
 

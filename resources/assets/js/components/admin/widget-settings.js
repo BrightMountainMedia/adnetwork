@@ -1,16 +1,17 @@
 Vue.component('widget-settings', {
+    props: ['articles'],
+
     /**
      * The component's data.
      */
     data() {
         return {
             form: new BMTMForm({
-                title: '',
-                count: 0,
+                widget_title: '',
+                widget_count: 0,
             }),
-
-            title: [],
-            articles: [],
+            title: '',
+            count: 0,
         };
     },
 
@@ -39,17 +40,12 @@ Vue.component('widget-settings', {
         getWidgetSettings() {
             this.$http.get('/api/widget_title')
                 .then(response => {
-                    this.form.title = this.title = response.data;
+                    this.form.widget_title = this.title = response.data;
                 });
 
             this.$http.get('/api/widget_count')
                 .then(response => {
-                    this.form.count = response.data;
-                });
-
-            this.$http.get('/api/widget_articles')
-                .then(response => {
-                    this.articles = response.data;
+                    this.form.widget_count = this.count = response.data;
                 });
         },
 
@@ -57,13 +53,12 @@ Vue.component('widget-settings', {
          * Update the widget settings.
          */
         update() {
-            this.$http.put('/admin/widget/widget_settings_update', this.form)
+            this.$http.post('/admin/widget/widget_settings_update', this.form)
                 .then(response => {
                     if ( response.data.successful ) {
                         this.form.successful = true;
-                        this.title = response.data.title.value;
-                        this.articles = response.data.articles;
-                        
+
+                        Bus.$emit('updateWidgetSettings');
                         Bus.$emit('updateWidgetArticles');
                         Bus.$emit('updateOtherArticles');
                     } else if ( response.data.error ) {

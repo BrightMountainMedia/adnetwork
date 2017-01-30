@@ -1,4 +1,4 @@
-<articles inline-template>
+<articles :articles="articles" :other_articles="other_articles" inline-template>
     <div>
         <div class="panel panel-default panel-flush">
             <!-- Create Button -->
@@ -12,7 +12,7 @@
             <div class="panel-heading">Articles (In Widget)</div>
 
             <div class="panel-body">
-                <article class="article-container" v-for="article in widgetArticles">
+                <article class="article-container" v-for="article in articles">
                     <img class="article-image" :src="
                     article.image_url" :alt="article.title" @click="editArticle(article)" />
                     <h3 class="article-title" @click="editArticle(article)">
@@ -26,7 +26,7 @@
             <div class="panel-heading">Articles (Other)</div>
 
             <div class="panel-body">
-                <article class="article-container" v-for="article in otherArticles">
+                <article class="article-container" v-for="article in other_articles">
                     <img class="article-image" :src="
                     article.image_url" :alt="article.title" @click="editArticle(article)" />
                     <h3 class="article-title" @click="editArticle(article)">

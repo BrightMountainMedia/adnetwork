@@ -24,8 +24,8 @@ class UpdateWidgetSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'string|required',
-            'count' => 'numeric|required',
+            'widget_title' => 'string|required',
+            'widget_count' => 'numeric|required',
         ];
     }
 }

@@ -54,43 +54,15 @@ class AdminController extends Controller
     }
 
     /**
-     * Get all widget articles.
-     *
-     * @return Response
-     */
-    public function widgetArticles()
-    {
-        $widget_count = Settings::where('name', 'widget_count')->first();
-        $articles = Article::widget()->active()->orderBy('id', 'desc')->get();
-
-        return response()->json(['articles' => $articles]);
-    }
-
-    /**
      * Get all other articles.
      *
      * @return Response
      */
     public function otherArticles()
     {
-        $articles = Article::nonwidget()->active()->orderBy('id', 'desc')->get();
+        $articles = Article::nonwidget()->active()->orderBy('created_at', 'desc')->get();
 
         return response()->json(['articles' => $articles]);
-    }
-
-    /**
-     * Get widget settings.
-     *
-     * @return Response
-     */
-    public function widgetSettings()
-    {
-        $widget_title = Settings::where('name', 'widget_title')->first();
-        $widget_count = Settings::where('name', 'widget_count')->first();
-
-        $articles = Article::widget()->active()->orderBy('id', 'desc')->limit($widget_count->value)->get();
-
-        return response()->json(['widget_title' => $widget_title, 'widget_count' => $widget_count, 'articles' => $articles]);
     }
 
     /**
@@ -163,19 +135,14 @@ class AdminController extends Controller
      */
     public function storeArticle(AddArticleRequest $request)
     {
-        if ( $request->image ) {
-            $path = Storage::putFile('public/articles', $request->file('image'));
-            $path = str_replace('public', 'storage', $path);
-        } else {
-            $path = $request->image_url;
-        }
-
         $article = new Article;
 
-        $article->image_url = $path;
+        $article->image_url = $request->image_url;
         $article->title = $request->title;
         $article->permalink = $request->permalink;
         $article->stats = json_encode(array(''));
+        $article->order = $request->order;
+        $article->widget = $request->widget;
         $article->active = 1;
 
         $article->save();
@@ -192,25 +159,26 @@ class AdminController extends Controller
      */
     public function updateArticle(UpdateArticleRequest $request, $id)
     {
-        if ( $request->image ) {
-            $path = Storage::putFile('public/articles', $request->file('image'));
-            $path = str_replace('public', 'storage', $path);
-        } else {
-            $path = $request->image_url;
-        }
-
         $widget_count = Settings::where('name', 'widget_count')->first();
         $articles_in_widget = Article::widget()->active()->count();
-
-        if ( $request->widget == 1 && $articles_in_widget == $widget_count->value ) {
-            return response()->json(['confirm' => 'There are already the max allowed articles within the widget, if you proceed, we will remove the oldest article from the widget and add this one.', 'request' => $request->all(), 'article_id' => $id]);
-        }
-
         $article = Article::find($id);
 
-        $article->image_url = $path;
+        if ( $request->widget == 1 && $article->widget == 0 && $articles_in_widget == $widget_count->value ) {
+            return response()->json(['confirm' => 'If you proceed, the article that was set in this position will be removed and this will go in its place.', 'request' => $request->all(), 'article_id' => $id]);
+        }
+
+        if ( $article->widget == 1 && $article->order != 0 && $request->order != 0 && $article->order != $request->order ) {
+            return response()->json(['confirm2' => 'If you proceed, the article that was set in this position will be swapped with this position.', 'request' => $request->all(), 'article_id' => $id]);
+        }
+
+        if ( $article->widget == 1 && $request->widget == 0 ) {
+            $request->order = 0;
+        }
+
+        $article->image_url = $request->image_url;
         $article->title = $request->title;
         $article->permalink = $request->permalink;
+        $article->order = $request->order;
         $article->widget = $request->widget;
         $article->active = $request->active;
 
@@ -226,24 +194,47 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateConfirmedArticle(Request $request, $id)
-    {
-        if ( $request->image ) {
-            $path = Storage::putFile('public/articles', $request->file('image'));
-            $path = str_replace('public', 'storage', $path);
-        } else {
-            $path = $request->image_url;
-        }
-        
-        $oldest_article = Article::widget()->active()->oldest()->first();
-        $oldest_article->widget = 0;
-        $oldest_article->save();
+    public function updateConfirmedArticleRemoveFromWidget(Request $request, $id)
+    {        
+        $old_article = Article::where('order', $request->order)->widget()->active()->first();
+        $old_article->widget = 0;
+        $old_article->order = 0;
+        $old_article->save();
 
         $article = Article::find($id);
 
-        $article->image_url = $path;
+        $article->image_url = $request->image_url;
         $article->title = $request->title;
         $article->permalink = $request->permalink;
+        $article->order = $request->order;
+        $article->widget = $request->widget;
+        $article->active = $request->active;
+
+        $article->save();
+
+        return response()->json(['article' => $article]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Department\UpdateDepartmentRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateConfirmedArticleSwapPlacement(Request $request, $id)
+    {        
+        $old_article = Article::where('order', $request->order)->widget()->active()->first();
+        $article = Article::find($id);
+        if ( $old_article ) {
+            $old_article->order = $article->order;
+            $old_article->save();
+        }
+
+        $article->image_url = $request->image_url;
+        $article->title = $request->title;
+        $article->permalink = $request->permalink;
+        $article->order = $request->order;
         $article->widget = $request->widget;
         $article->active = $request->active;
 
@@ -301,15 +292,15 @@ class AdminController extends Controller
     {
         $widget_title = Settings::updateOrCreate(
             ['name' => 'widget_title'],
-            ['name' => 'widget_title', 'value' => $request->title]
+            ['name' => 'widget_title', 'value' => $request->widget_title]
         );
 
         $widget_count = Settings::updateOrCreate(
             ['name' => 'widget_count'],
-            ['name' => 'widget_count', 'value' => $request->count]
+            ['name' => 'widget_count', 'value' => $request->widget_count]
         );
 
-        if ( $widget_count->value == $request->count && $widget_title->value == $request->title ) {
+        if ( $widget_count->value == $request->widget_count && $widget_title->value == $request->widget_title ) {
             $articles = Article::active()->widget()->limit($widget_count->value)->get();
 
             return response()->json(['successful' => true, 'title' => $widget_title, 'articles' => $articles]);

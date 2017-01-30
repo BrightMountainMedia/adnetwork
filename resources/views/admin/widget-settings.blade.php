@@ -1,4 +1,4 @@
-<widget-settings inline-template>
+<widget-settings :articles="articles" inline-template>
     <div>
         <!-- Widget Settings -->
         <div class="panel panel-default">
@@ -12,14 +12,14 @@
 
                 <form class="form-horizontal" role="form">
                     <!-- Widget Title -->
-                    <div class="form-group" :class="{'has-error': form.errors.has('title')}">
-                        <label class="col-sm-4 control-label" for="title">Widget Title</label>
+                    <div class="form-group" :class="{'has-error': form.errors.has('widget_title')}">
+                        <label class="col-sm-4 control-label" for="widget_title">Widget Title</label>
 
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="title" id="title" v-model="form.title">
+                            <input type="text" class="form-control" name="widget_title" id="widget_title" v-model="form.widget_title">
 
-                            <span class="help-block" v-show="form.errors.has('title')">
-                                @{{ form.errors.get('title') }}
+                            <span class="help-block" v-show="form.errors.has('widget_title')">
+                                @{{ form.errors.get('widget_title') }}
                             </span>
                         </div>
                     </div>
@@ -27,14 +27,14 @@
                     <div class="clearfix"></div>
 
                     <!-- Article Count -->
-                    <div class="form-group" :class="{'has-error': form.errors.has('count')}">
-                        <label class="col-sm-4 control-label" for="count">Article Count</label>
+                    <div class="form-group" :class="{'has-error': form.errors.has('widget_count')}">
+                        <label class="col-sm-4 control-label" for="widget_count">Article Count</label>
 
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="count" id="count" v-model="form.count">
+                            <input type="text" class="form-control" name="widget_count" id="widget_count" v-model="form.widget_count">
 
-                            <span class="help-block" v-show="form.errors.has('count')">
-                                @{{ form.errors.get('count') }}
+                            <span class="help-block" v-show="form.errors.has('widget_count')">
+                                @{{ form.errors.get('widget_count') }}
                             </span>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <article class="widget-article" v-for="article in articles">
                             <div class="article-image">
                                 <a :href="article.permalink" :title="article.title" target="_blank">
-                                    <img :src="article.image_url" :alt="article.title" />
+                                    <span class="image" :style="{ 'background-image': 'url(' + article.image_url + ')' }"></span>
                                 </a>
                             </div>
                             <div class="title-container">

@@ -196,8 +196,13 @@ li.list-group-item:hover {
             .article-image {
                 margin-bottom: 7px;
 
-                img {
-                    width: 100%;
+                span.image {
+                    display: block;
+                    width: 258px;
+                    height: 180px;
+                    background-position: center center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
                 }
             }
 

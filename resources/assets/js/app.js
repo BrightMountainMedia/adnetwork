@@ -6,8 +6,9 @@
  */
 
 require('./bootstrap');
-require('./components/bootstrap');
 require('./bmtm/forms/bootstrap');
+
+require('./components/bootstrap');
 
 Vue.component(
     'passport-clients',

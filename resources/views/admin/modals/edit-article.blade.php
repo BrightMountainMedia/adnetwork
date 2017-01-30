@@ -61,6 +61,25 @@
 
                             <div class="clearfix"></div>
 
+                            <!-- Order -->
+                            <div class="form-group" :class="{'has-error': articleForm.errors.has('widget')}">
+                                <label class="col-sm-4 control-label">Order</label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="order" v-model="articleForm.order">
+                                        <option v-for="order_option in order_options" v-bind:value="order_option.value">
+                                            @{{ order_option.text }}
+                                        </option>
+                                    </select>
+
+                                    <span class="help-block" v-show="articleForm.errors.has('order')">
+                                        @{{ articleForm.errors.get('order') }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
                             <!-- Widget -->
                             <div class="form-group" :class="{'has-error': articleForm.errors.has('widget')}">
                                 <label class="col-sm-4 control-label">Widget</label>

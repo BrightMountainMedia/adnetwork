@@ -19,7 +19,6 @@ require('./admin/modals/add-stat');
 require('./admin/modals/edit-stat');
 
 require('./admin/articles');
-require('./admin/article-profile');
 require('./admin/modals/add-article');
 require('./admin/modals/edit-article');
 

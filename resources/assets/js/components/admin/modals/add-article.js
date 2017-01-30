@@ -4,7 +4,8 @@ function adminAddArticleForm () {
         image_url: '',
         title: '',
         permalink: '',
-        status: 0,
+        order: 0,
+        widget: 0
     };
 }
 
@@ -15,6 +16,20 @@ Vue.component('add-article', {
     data() {
         return {
             addingArticle: false,
+            
+            order_options: [
+                { text: 'N/A', value: '0' },
+                { text: '1', value: '1' },
+                { text: '2', value: '2' },
+                { text: '3', value: '3' },
+                { text: '4', value: '4' },
+                { text: '5', value: '5' }
+            ],
+            widget_options: [
+                { text: 'In Widget', value: '1' },
+                { text: 'Not In Widget', value: '0' }
+            ],
+
             articleForm: new BMTMForm(adminAddArticleForm())
         };
     },

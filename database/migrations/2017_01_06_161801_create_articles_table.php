@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->string('permalink', 510);
             $table->text('stats')->nullable();
+            $table->tinyInteger('order')->default(0);
             $table->boolean('widget')->default(0);
             $table->boolean('active')->default(0);
             $table->timestamps();

@@ -15,10 +15,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::get('/widget_title', function (Request $request) {
     $widget_title = Settings::where('name', 'widget_title')->first();
     return $widget_title->value;
@@ -31,6 +27,6 @@ Route::get('/widget_count', function (Request $request) {
 
 Route::get('/widget_articles', function (Request $request) {
     $widget_count = Settings::where('name', 'widget_count')->first();
-    $articles = Article::widget()->active()->orderBy('id', 'desc')->limit($widget_count->value)->get();
+    $articles = Article::widget()->active()->orderBy('order', 'asc')->limit($widget_count->value)->get();
     return $articles;
 });

@@ -7870,8 +7870,13 @@ li.list-group-item:hover {
   margin-bottom: 7px;
 }
 
-.widget .widget-content .widget-article .article-image img {
-  width: 100%;
+.widget .widget-content .widget-article .article-image span.image {
+  display: block;
+  width: 258px;
+  height: 180px;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .widget .widget-content .widget-article .article-title {

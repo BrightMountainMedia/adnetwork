@@ -35,9 +35,10 @@ Route::get('/admin/other_articles', 'AdminController@otherArticles');
 Route::get('/admin/article/{id}/article_profile', 'AdminController@showArticle');
 Route::post('/admin/article/add_article', 'AdminController@storeArticle');
 Route::put('/admin/article/{id}/edit_article', 'AdminController@updateArticle');
-Route::put('/admin/confirmed/article/{id}/edit_article', 'AdminController@updateConfirmedArticle');
+Route::put('/admin/confirmed/article/{id}/edit_article', 'AdminController@updateConfirmedArticleRemoveFromWidget');
+Route::put('/admin/confirmed2/article/{id}/edit_article', 'AdminController@updateConfirmedArticleSwapPlacement');
 Route::get('/admin/widget_settings', 'AdminController@widgetSettings');
-Route::put('/admin/widget/widget_settings_update', 'AdminController@updateWidgetSettings');
+Route::post('/admin/widget/widget_settings_update', 'AdminController@updateWidgetSettings');
 
 Route::get('/profile', ['as' => 'profile', 'uses' => 'ProfileController@create']);
 Route::post('/profile', ['as' => 'profile_store', 'uses' => 'ProfileController@store']);
