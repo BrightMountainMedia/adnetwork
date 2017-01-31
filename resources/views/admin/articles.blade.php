@@ -36,7 +36,6 @@
                             @{{ article.title }}
                         </h3>
                     </article>
-                    <div class="pagination" v-if="other_articles.length >= 10">I am awesome!</div>
                 </div>
             </div>
         </div>

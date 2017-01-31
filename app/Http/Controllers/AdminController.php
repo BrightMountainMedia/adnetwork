@@ -50,7 +50,7 @@ class AdminController extends Controller
     {
         $publishers = User::where('role', 'publisher')->orderBy('first_name')->get();
 
-        return response()->json(['publishers' => $publishers]);
+        return response()->json(compact('publishers'));
     }
 
     /**
@@ -62,7 +62,7 @@ class AdminController extends Controller
     {
         $articles = Article::nonwidget()->active()->orderBy('created_at', 'desc')->get();
 
-        return response()->json(['articles' => $articles]);
+        return response()->json(compact('articles'));
     }
 
     /**
@@ -76,7 +76,7 @@ class AdminController extends Controller
         $publisher = User::find($id);
         $stats = Stats::where('user_id', $id)->orderBy('date', 'DESC')->orderBy('id', 'DESC')->get();
 
-        return response()->json(['publisher' => $publisher, 'stats' => $stats]);
+        return response()->json(compact('publisher', 'stats'));
     }
 
     /**
@@ -99,7 +99,7 @@ class AdminController extends Controller
 
         $publisher = User::find($request->user_id);
 
-        return response()->json(['publisher' => $publisher]);
+        return response()->json(compact('publisher'));
     }
 
     /**
@@ -124,7 +124,7 @@ class AdminController extends Controller
 
         $publisher = User::find($request->user_id);
 
-        return response()->json(['publisher' => $publisher]);
+        return response()->json(compact('publisher'));
     }
 
     /**
@@ -147,7 +147,7 @@ class AdminController extends Controller
 
         $article->save();
 
-        return response()->json(['article' => $article]);
+        return response()->json(compact('article'));
     }
 
     /**
@@ -184,7 +184,7 @@ class AdminController extends Controller
 
         $article->save();
 
-        return response()->json(['article' => $article]);
+        return response()->json(compact('article'));
     }
 
     /**
@@ -212,7 +212,7 @@ class AdminController extends Controller
 
         $article->save();
 
-        return response()->json(['article' => $article]);
+        return response()->json(compact('article'));
     }
 
     /**
@@ -240,7 +240,7 @@ class AdminController extends Controller
 
         $article->save();
 
-        return response()->json(['article' => $article]);
+        return response()->json(compact('article'));
     }
 
     /**

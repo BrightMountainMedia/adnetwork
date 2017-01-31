@@ -57,27 +57,29 @@
         </div>
 
         <!-- Widget Example -->
-        <div class="panel panel-default">
-            <div class="panel-heading">Widget Example</div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Widget Example</div>
 
-            <div class="panel-body">
-                <div class="widget">
-                    <h2 class="widget-title">@{{ title }}</h1>
-                    <div class="widget-content">
-                        <article class="widget-article" v-for="article in articles">
-                            <div class="article-image">
-                                <a :href="article.permalink" :title="article.title" target="_blank">
-                                    <span class="image" :style="{ 'background-image': 'url(' + article.image_url + ')' }"></span>
-                                </a>
-                            </div>
-                            <div class="title-container">
-                                <h3 class="article-title">
+                <div class="panel-body">
+                    <div class="widget">
+                        <h2 class="widget-title">@{{ title }}</h2>
+                        <div class="widget-content">
+                            <article class="widget-article" v-for="article in articles">
+                                <div class="article-image">
                                     <a :href="article.permalink" :title="article.title" target="_blank">
-                                        @{{ article.title }}
+                                        <span class="image" :style="{ 'background-image': 'url(' + article.image_url + ')' }"></span>
                                     </a>
-                                </h3>
-                            </div>
-                        </article>
+                                </div>
+                                <div class="title-container">
+                                    <h3 class="article-title">
+                                        <a :href="article.permalink" :title="article.title" target="_blank">
+                                            @{{ article.title }}
+                                        </a>
+                                    </h3>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div>
