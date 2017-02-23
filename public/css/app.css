@@ -7862,8 +7862,8 @@ li.list-group-item:hover {
 
 .widget .widget-content .widget-article {
   border-top: 1px solid #e6e6e6;
-  padding-top: 20px;
-  margin-bottom: 6px;
+  padding-top: 8px;
+  margin-bottom: 8px;
 }
 
 .widget .widget-content .widget-article .article-image {
