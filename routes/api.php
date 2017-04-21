@@ -15,7 +15,7 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['middleware' => 'throttle:600,1'], function() {
+Route::group(['middleware' => 'throttle:600'], function() {
 
         Route::get('/widget_title', function (Request $request) {
             $widget_title = Settings::where('name', 'widget_title')->first();
