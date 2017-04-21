@@ -32,9 +32,9 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
         ],
-
+/*change the throttle from 60,1 to 600,1 */
         'api' => [
-            'throttle:60,1',
+            'throttle:600,1',
             'bindings',
         ],
     ];
