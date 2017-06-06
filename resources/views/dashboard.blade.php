@@ -5,6 +5,20 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
+
+
+
+<div class="panel panel-default panel-flush">
+
+    <a href="/download" class="btn btn-primary btn-block"><i class="fa fa-cloud-download"></i> Download Stats</a>
+
+</div>
+
+
+
+
+
+
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
