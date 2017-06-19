@@ -10,7 +10,6 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
 Route::get('/', function () {
     return view('home');
 });
@@ -23,32 +22,64 @@ Route::post('/support/email', 'SupportController@sendEmail');
 // Front-End Pages publishers
 Route::get('/dashboard', 'DashboardController@index');
 
-//csv download page 
+//csv download publisher page 
 Route::get('/download', function(){
 
     $id = Auth::id();
     $table = \App\Stats::where('user_id','=',$id)->get();
-    $filename = "Stats.csv";
-    $handle = fopen($filename, 'w+');
+  if ($table->isEmpty()) {
 
-     fputcsv($handle, array('DATE','SITE','TAG','IMPRESSIONS','SERVED','FILL','INCOME','eCPM'));
+die();
+   }
+        $filename = "Stats.csv";
+        $handle = fopen($filename, 'w+');
 
-     foreach($table as $row) {
-        fputcsv($handle, array($row['date'],$row['site'],$row['tag'], $row['impressions'],$row['served'],number_format($row->served / $row->impressions * 100, 2, '.', '').'%' ,'$'.$row['income'],'$'.number_format($row->income / $row->served * 1000, 2, '.', '') ));
-    }
-//replace the 'x' this is not a sign by a real multiplication sign 
-       $str=file_get_contents('Stats.csv');
-       $str=str_replace("×", "x",$str);
-       file_put_contents('Stats.csv', $str);
+         fputcsv($handle, array('DATE','SITE','TAG','IMPRESSIONS','SERVED','FILL','INCOME','eCPM'));
 
-    fclose($handle);
-    
-    $headers = array(
-        'Content-Type' => 'text/csv',
-    );
-    return Response::download($filename, 'Stats.csv', $headers);
+         foreach($table as $row) {
+            fputcsv($handle, array($row['date'],$row['site'],$row['tag'], $row['impressions'],$row['served'],number_format($row->served / $row->impressions * 100, 2, '.', '').'%' ,'$'.$row['income'],'$'.number_format($row->income / $row->served * 1000, 2, '.', '') ));
+        }
+    //replace the 'x' this is not a sign by a real multiplication sign 
+           $str=file_get_contents('Stats.csv');
+           $str=str_replace("×", "x",$str);
+           file_put_contents('Stats.csv', $str);
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+        return Response::download($filename, 'Stats.csv', $headers);
 });
 //end of csv download page 
+
+//csv download admin page 
+Route::get('admin/download', function(){
+    $table = \App\Stats::get();
+  if ($table->isEmpty()) {
+die();
+   }
+        $filename = "PartnerStats.csv";
+        $handle = fopen($filename, 'w+');
+
+         fputcsv($handle, array('DATE','SITE','TAG','IMPRESSIONS','SERVED','FILL','INCOME','eCPM'));
+
+         foreach($table as $row) {
+            fputcsv($handle, array($row['date'],$row['site'],$row['tag'], $row['impressions'],$row['served'],number_format($row->served / $row->impressions * 100, 2, '.', '').'%' ,'$'.$row['income'],'$'.number_format($row->income / $row->served * 1000, 2, '.', '') ));
+        }
+    //replace the 'x' this is not a sign by a real multiplication sign 
+           $str=file_get_contents('PartnerStats.csv');
+           $str=str_replace("×", "x",$str);
+           file_put_contents('PartnerStats.csv', $str);
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+        return Response::download($filename, 'PartnerStats.csv', $headers);
+});
+//end //csv download admin page 
 
 // Admin Pages
 Route::get('/admin', 'AdminController@index');
