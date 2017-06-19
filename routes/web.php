@@ -65,7 +65,9 @@ die();
          fputcsv($handle, array('DATE','SITE','TAG','IMPRESSIONS','SERVED','FILL','INCOME','eCPM'));
 
          foreach($table as $row) {
-            fputcsv($handle, array($row['date'],$row['site'],$row['tag'], $row['impressions'],$row['served'],number_format($row->served / $row->impressions * 100, 2, '.', '').'%' ,'$'.$row['income'],'$'.number_format($row->income / $row->served * 1000, 2, '.', '') ));
+            $A=$row->impressions != 0 ? number_format($row->served / $row->impressions * 100, 2, '.', '') : $A=0;
+            $B=$row->served != 0 ? number_format($row->income / $row->served * 1000, 2, '.', '') : $B=0;
+            fputcsv($handle, array($row['date'],$row['site'],$row['tag'], $row['impressions'],$row['served'],$A.'%' ,'$'.$row['income'],'$'.$B));
         }
     //replace the 'x' this is not a sign by a real multiplication sign 
            $str=file_get_contents('PartnerStats.csv');
