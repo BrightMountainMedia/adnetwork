@@ -14,11 +14,6 @@
 
 </div>
 
-
-
-
-
-
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
@@ -59,10 +54,23 @@
                                 <td>{{ $stat->impressions }}</td>
                                 <td>{{ $stat->served }}</td>
                                 <!-- <td>{{ $stat->fill }}%</td> -->
-                                <td>{{ number_format($stat->served / $stat->impressions * 100, 2, '.', '') }}%</td>
+                                <td>
+                                    @if($stat->impressions==0 || $stat->served==0 )
+                                        0,00%
+                                    @else
+                                        {{ number_format($stat->served / $stat->impressions * 100, 2, '.', '') }}%
+                                    @endif
+                                </td>
                                 <td>${{ $stat->income }}</td>
                                 <!-- <td>${{ $stat->ecpm }}</td> -->
-                                <td>${{ number_format($stat->income / $stat->served * 1000, 2, '.', '') }}</td>
+
+                                <td>
+                                    @if($stat->impressions==0 || $stat->served==0 )
+                                        $0.00
+                                    @else
+                                        ${{ number_format($stat->income / $stat->served * 1000, 2, '.', '') }}
+                                    @endif
+                                </td>
                             </tr>
                             @endif
                             @endforeach

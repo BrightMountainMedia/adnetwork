@@ -123,11 +123,13 @@ Vue.component('publisher-profile', {
         },
 
         fill_rate(stat) {
-            return stat.served / stat.impressions * 100;
+            var result = isFinite(stat.served / stat.impressions * 100) ? stat.served / stat.impressions * 100 : 0;
+            return result;
         },
 
         eCPM_calc(stat) {
-            return stat.income / stat.served * 1000;
+            var result = isFinite(stat.income / stat.served * 1000) ? stat.income / stat.served * 1000 : 0;
+            return result;
         }
     },
 
