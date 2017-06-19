@@ -5,6 +5,7 @@
             <button type="submit" class="btn btn-primary btn-block" @click="addPublisher()">
                 <i class="fa fa-plus"></i> Add Publisher
             </button><br>
+            
                 <a href="admin/download" class="btn btn-primary btn-block"><i class="fa fa-cloud-download"></i> Download Publisher's Stats</a>
         </div>
 
