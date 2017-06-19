@@ -42,7 +42,7 @@ Route::get('/download', function(){
        file_put_contents('Stats.csv', $str);
 
     fclose($handle);
-
+    
     $headers = array(
         'Content-Type' => 'text/csv',
     );
